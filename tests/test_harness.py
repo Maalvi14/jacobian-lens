@@ -36,11 +36,13 @@ def test_find_plateau_no_plateau_when_always_changing():
 def test_eps_sweep_on_quadratic_form_is_flat_everywhere():
     torch.manual_seed(0)
     d = 6
-    A = torch.randn(d, d)
+    # float64: a central difference of a linear gradient is exact, so float32
+    # rounding (amplified by 1/(2*eps)) would be the only error left
+    A = torch.randn(d, d, dtype=torch.float64)
     A = (A + A.T) / 2
 
-    h = torch.randn(d)
-    v = torch.randn(d)
+    h = torch.randn(d, dtype=torch.float64)
+    v = torch.randn(d, dtype=torch.float64)
 
     def f(h: torch.Tensor) -> torch.Tensor:
         return 0.5 * h @ A @ h
@@ -50,7 +52,7 @@ def test_eps_sweep_on_quadratic_form_is_flat_everywhere():
 
     expected = A @ v
     for row in curve:
-        torch.testing.assert_close(row, expected, rtol=1e-3, atol=1e-3)
+        torch.testing.assert_close(row, expected, rtol=1e-6, atol=1e-6)
 
     result = find_plateau(curve, eps_grid, tol=0.01, min_run_length=2)
     assert result.has_plateau

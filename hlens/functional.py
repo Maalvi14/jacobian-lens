@@ -37,7 +37,12 @@ def _capture_block_kwargs(model: LensModel, block_index: int, seq_len: int) -> d
     device = next(block.parameters()).device
     dummy_ids = torch.zeros((1, seq_len), dtype=torch.long, device=device)
 
+    # DisableFuncTorch: if the first call happens inside a torch.func transform
+    # (e.g. hvp_fr), the captured tensors would be wrapped at that transform's
+    # level and "escape" when the cache is reused under a later transform.
+    # Capturing at the base level keeps them plain.
     with (
+        torch._C._DisableFuncTorch(),
         _BlockKwargsCapture(block) as capture,
         torch.no_grad(),
     ):
@@ -59,16 +64,15 @@ def make_slice_fn(model: LensModel, l_start: int, l_end: int
             f"require 0 <= l_start < l_end < n_layers={model.n_layers}, "
             f"got l_start={l_start}, l_end={l_end}")
 
-    cache: dict[int, dict] = {}
+    cache: dict[tuple[int, int], dict] = {}
 
     def slice_fn(h: torch.Tensor) -> torch.Tensor:
         seq_len = h.shape[-2]
-        if seq_len not in cache:
-            cache[seq_len] = _capture_block_kwargs(model, l_start + 1, seq_len)
-        kwargs = cache[seq_len]
-
-        for block in model.layers[l_start + 1 : l_end + 1]:
-            out = block(h, **kwargs)
+        for i in range(l_start + 1, l_end + 1):
+            key = (seq_len, i)
+            if key not in cache:
+                cache[key] = _capture_block_kwargs(model, i, seq_len)
+            out = model.layers[i](h, **cache[key])
             h = out if torch.is_tensor(out) else out[0]
         return h
 

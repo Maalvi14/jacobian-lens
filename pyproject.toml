@@ -12,7 +12,7 @@ license = "Apache-2.0"
 dependencies = [
     "torch",
     "huggingface_hub",
-    "transformers>=5.5",
+    "transformers>=5.11",
     "numpy",
     "pytest>=9.0.3",
     "scipy>=1.15.3",
@@ -38,3 +38,8 @@ packages = ["jlens"]
 
 [tool.setuptools.package-data]
 jlens = ["data/*"]
+
+[dependency-groups]
+dev = [
+    "datasets>=4.8.5",
+]

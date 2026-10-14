@@ -1,7 +1,13 @@
+import time
+
+import pytest
 import torch
 
 from hlens.jspace import lens_vectors, sparse_pursuit, decompose, k_variation
-from jlens.fitting import fit
+from jlens import JacobianLens
+from jlens.examples import load_wikitext_prompts
+from jlens.fitting import fit, valid_position_mask
+from jlens.hooks import ActivationRecorder
 
 from .tiny import TinyDecoder
 
@@ -85,3 +91,124 @@ def test_k_variation_prefix_consistency():
     results = k_variation(h, dictionary, k_values=[2, 4])
 
     assert results[2].indices == results[4].indices[: len(results[2].indices)]
+
+
+# ---------------------------------------------------------------------------
+# Paper-reproduction gate (plan §3), real Qwen3.5-4B in bf16 (the precision the
+# lens was fitted in): J-space share of variance at mid layers, atoms per
+# position, and sensible atoms on the boot prompt.
+# Run: uv run pytest tests/test_jspace.py -m real_model -s
+# ---------------------------------------------------------------------------
+
+GATE_LAYERS = [12, 16, 20]
+N_PROMPTS = 50
+POSITIONS_PER_PROMPT = 3
+K = 25
+BOOT_PROMPT = "Fact: The currency used in the country shaped like a boot is"
+
+
+@pytest.fixture(scope="module")
+def unembed_directions(qwen):
+    """u_t = d logit_t / d h_final for every token: [vocab, d_model]. Independent
+    of the lens layer, so compute once. (lens_vectors with an identity lens
+    returns u @ I = u.)"""
+    d = qwen.model.d_model
+    vocab = qwen.hf.config.get_text_config().vocab_size
+    identity_lens = JacobianLens({0: torch.eye(d)}, n_prompts=0, d_model=d)
+    t0 = time.time()
+    u = lens_vectors(identity_lens, qwen.model, 0, list(range(vocab)), dim_batch=512)
+    print(f"\nunembed directions {tuple(u.shape)} in {time.time() - t0:.0f}s", flush=True)
+    return u
+
+
+@pytest.fixture(scope="module")
+def dictionary_for(qwen, unembed_directions):
+    """layer -> (unit-norm J-lens dictionary [n_atoms, d_model], token id per
+    atom). Keeps one 2.5 GB dictionary alive at a time."""
+    cache = {}
+
+    def get(layer):
+        if layer not in cache:
+            cache.clear()
+            V = unembed_directions @ qwen.lens.jacobians[layer]
+            norms = V.norm(dim=1)
+            keep = norms > 1e-6  # unused vocab rows would break unit-norm
+            cache[layer] = (V[keep] / norms[keep, None], keep.nonzero().squeeze(1))
+        return cache[layer]
+
+    return get
+
+
+def _collect_residuals(model, prompts, layers):
+    """{layer: [n_prompts * POSITIONS_PER_PROMPT, d_model]} fp32 on CPU, at
+    evenly spaced positions that pass jlens's own valid_position_mask."""
+    out = {layer: [] for layer in layers}
+    for prompt in prompts:
+        ids = model.encode(prompt, max_length=128)
+        with torch.no_grad(), ActivationRecorder(model.layers, at=layers) as rec:
+            model.forward(ids)
+            acts = {l: rec.activations[l][0].float().cpu() for l in layers}
+        valid = valid_position_mask(ids.shape[1]).nonzero().squeeze(1)
+        pick = valid[torch.linspace(0, len(valid) - 1, POSITIONS_PER_PROMPT).round().long()]
+        for layer in layers:
+            out[layer].append(acts[layer][pick])
+    return {layer: torch.cat(v) for layer, v in out.items()}
+
+
+def _pursuit_stats(hs, dictionary):
+    fracs, n_selected, n_active = [], [], []
+    for h in hs:
+        d = decompose(h, dictionary, k=K)
+        fracs.append(d.frac_variance)
+        n_selected.append(len(d.indices))
+        # "meaningfully active": coefficient within 5% of the largest one
+        n_active.append(int((d.coeffs >= 0.05 * d.coeffs.max()).sum()))
+    return torch.tensor(fracs), torch.tensor(n_selected).float(), torch.tensor(n_active).float()
+
+
+def _summarize(name, fracs, n_selected, n_active):
+    q = torch.quantile(fracs, torch.tensor([0.5, 0.9]))
+    print(
+        f"  {name}: frac_variance mean={fracs.mean():.3f} median={q[0]:.3f} "
+        f"p90={q[1]:.3f} max={fracs.max():.3f} | atoms selected={n_selected.mean():.1f} "
+        f"active(>=5% of max coef)={n_active.mean():.1f}",
+        flush=True,
+    )
+
+
+@pytest.mark.real_model
+def test_jspace_paper_gate(qwen, dictionary_for):
+    model, tok = qwen.model, qwen.tokenizer
+    prompts = load_wikitext_prompts(N_PROMPTS)
+    residuals = _collect_residuals(model, prompts, GATE_LAYERS)
+    boot_ids = model.encode(BOOT_PROMPT, max_length=64)
+    with torch.no_grad(), ActivationRecorder(model.layers, at=GATE_LAYERS) as rec:
+        model.forward(boot_ids)
+        boot_acts = {l: rec.activations[l][0].float().cpu() for l in GATE_LAYERS}
+
+    medians = {}
+    for layer in GATE_LAYERS:
+        D, token_ids = dictionary_for(layer)
+        print(f"\nlayer {layer}: dictionary {tuple(D.shape)}", flush=True)
+        t0 = time.time()
+        stats = _pursuit_stats(residuals[layer], D)
+        _summarize(f"WikiText ({len(stats[0])} positions, {time.time() - t0:.0f}s)", *stats)
+        medians[layer] = torch.median(stats[0]).item()
+
+        if layer == GATE_LAYERS[len(GATE_LAYERS) // 2]:
+            # control: same pursuit against random unit atoms of the same count
+            g = torch.Generator().manual_seed(0)
+            R = torch.randn(D.shape, generator=g)
+            R /= R.norm(dim=1, keepdim=True)
+            _summarize("random-dictionary control (40 positions)", *_pursuit_stats(residuals[layer][:40], R))
+            del R
+
+        for pos in (-2, -1):
+            d = decompose(boot_acts[layer][pos], D, k=K)
+            order = d.coeffs.argsort(descending=True)[:8]
+            atoms = [tok.decode([token_ids[d.indices[i]].item()]) for i in order]
+            print(f"  boot prompt pos {pos} ({tok.decode(boot_ids[0, pos:][:1])!r}) "
+                  f"frac={d.frac_variance:.3f} top atoms: {atoms}", flush=True)
+
+    for layer, m in medians.items():
+        assert m <= 0.10, f"layer {layer}: median J-space fraction {m:.3f} > 0.10"
