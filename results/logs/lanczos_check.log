@@ -1,0 +1,17 @@
+START Mon Oct 19 05:40:21 PM EST 2026
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 21732.15it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<02:10,  3.27it/s]Loading weights:  18%|█▊        | 78/426 [00:00<00:01, 231.02it/s]Loading weights:  27%|██▋       | 116/426 [00:00<00:01, 264.17it/s]Loading weights:  36%|███▌      | 152/426 [00:00<00:01, 264.64it/s]Loading weights:  46%|████▌     | 195/426 [00:00<00:00, 302.50it/s]Loading weights:  54%|█████▍    | 230/426 [00:00<00:00, 299.38it/s]Loading weights:  62%|██████▏   | 263/426 [00:01<00:00, 300.30it/s]Loading weights:  70%|██████▉   | 297/426 [00:01<00:00, 307.78it/s]Loading weights:  77%|███████▋  | 330/426 [00:01<00:00, 313.78it/s]Loading weights:  85%|████████▌ | 363/426 [00:01<00:00, 303.53it/s]Loading weights:  93%|█████████▎| 397/426 [00:01<00:00, 304.37it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 280.04it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 11066.77it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+trial 0: 40 cells, 302s
+trial 3: 80 cells, 606s
+trial 6: 120 cells, 908s
+trial 9: 160 cells, 1223s
+trial 12: 200 cells, 1526s
+trial 15: 240 cells, 1829s
+trial 18: 280 cells, 2130s
+trial 21: 320 cells, 2437s
+run exit 0 Mon Oct 19 06:21:08 PM EST 2026
+analyze exit 0 Mon Oct 19 06:21:11 PM EST 2026
+ALL DONE Mon Oct 19 06:21:11 PM EST 2026

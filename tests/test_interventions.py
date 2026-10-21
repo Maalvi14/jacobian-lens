@@ -157,13 +157,9 @@ def test_multihop_swap_flips_currency(qwen):
 
 
 def _probe_items(tok):
-    items = []
-    for it in load_probe_swap(str(PROBE_SWAP)):
-        s = tok.encode(" " + it.intermediate, add_special_tokens=False)
-        t = tok.encode(" " + it.swap_to, add_special_tokens=False)
-        if len(s) == 1 and len(t) == 1:  # lens vectors are per single token
-            items.append((it, s[0], t[0]))
-    return items
+    from hlens.swaps import probe_items
+
+    return probe_items(tok, str(PROBE_SWAP))
 
 
 @pytest.mark.real_model
@@ -184,8 +180,9 @@ def test_probe_swap_sweep(qwen):
     todo = []  # baseline-correct items
     for it, s, t in items:
         ids = model.encode(it.prompt, max_length=128)
-        ans = {tok.encode(w, add_special_tokens=False)[0] for w in (it.answer, " " + it.answer)}
-        swap_ans = {tok.encode(w, add_special_tokens=False)[0] for w in (it.swap_answer, " " + it.swap_answer)}
+        from hlens.swaps import first_token_ids
+
+        ans, swap_ans = first_token_ids(tok, it.answer), first_token_ids(tok, it.swap_answer)
         if _readout(model, tok, ids, [])[0] in ans:
             todo.append((it, ids, U[[row[s], row[t]]], ans, swap_ans))
     n = len(todo)

@@ -37,6 +37,14 @@ prompt.*
 pip install -e .
 ```
 
+### Notes for the `hlens` extension (Jetson Thor setup)
+
+- The environment is managed with `uv`. `uv.lock` pins the stock PyPI `torch` `+cu130` wheel, which includes `sm_110` and runs natively on the NVIDIA Thor.
+  Do not let `uv sync` (or another installer) replace it; run things with `uv run --no-sync ...` or the activated `.venv`.
+- Curvature work needs **eager attention** (the fused SDPA kernels have no forward-mode autodiff) and **fp32**. Do not install `flash-linear-attention`,
+  `causal-conv1d` or `kernels` for Qwen3.5/3.6: the plain-PyTorch fallback is the one the tests and results use.
+- The Thor shares one memory pool between the CPU and the GPU. Between large jobs, drop the page cache (`sudo sysctl vm.drop_caches=3`) and run one large job at a time.
+
 ## Usage
 
 ### Apply

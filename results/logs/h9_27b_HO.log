@@ -1,0 +1,158 @@
+START Sat Oct 17 12:32:17 AM EST 2026
+Fetching 15 files:   0%|          | 0/15 [00:00<?, ?it/s]Fetching 15 files: 100%|██████████| 15/15 [00:00<00:00, 13295.55it/s]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  16%|█▌        | 134/851 [00:00<00:00, 1339.02it/s]Loading weights:  31%|███▏      | 268/851 [00:00<00:00, 1278.81it/s]Loading weights:  47%|████▋     | 397/851 [00:00<00:00, 1206.88it/s]Loading weights:  61%|██████▏   | 522/851 [00:00<00:00, 1215.30it/s]Loading weights:  76%|███████▌  | 648/851 [00:00<00:00, 1220.30it/s]Loading weights:  91%|█████████ | 771/851 [00:00<00:00, 1222.34it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 1227.29it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1105.22it/s]
+qwen3.6-27b (mixed precision): 120 trials, src 24 tgt 41 mid 33
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  trial 1/120, 254s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 2/120, 359s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 3/120, 433s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 4/120, 508s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 5/120, 591s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 6/120, 666s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 7/120, 746s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 8/120, 825s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 9/120, 900s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 10/120, 975s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 11/120, 1048s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 12/120, 1127s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 13/120, 1203s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 14/120, 1281s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 15/120, 1360s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 16/120, 1439s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 17/120, 1521s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 18/120, 1594s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 19/120, 1666s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 20/120, 1741s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 21/120, 1819s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 22/120, 1897s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 23/120, 1977s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 24/120, 2053s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 25/120, 2131s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 26/120, 2207s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 27/120, 2284s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 28/120, 2359s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 29/120, 2435s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 30/120, 2512s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 31/120, 2587s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 32/120, 2663s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 33/120, 2732s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 34/120, 2808s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 35/120, 2883s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 36/120, 2957s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 37/120, 3030s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 38/120, 3106s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 39/120, 3180s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 40/120, 3254s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 41/120, 3330s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 42/120, 3404s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 43/120, 3477s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 44/120, 3553s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 45/120, 3626s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 46/120, 3701s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 47/120, 3772s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 48/120, 3844s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 49/120, 3918s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 50/120, 3993s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 51/120, 4069s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 52/120, 4147s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 53/120, 4223s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 54/120, 4297s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 55/120, 4373s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 56/120, 4444s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 57/120, 4519s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 58/120, 4594s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 59/120, 4669s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 60/120, 4743s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 61/120, 4816s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 62/120, 4893s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 63/120, 4970s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 64/120, 5044s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 65/120, 5119s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 66/120, 5194s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 67/120, 5270s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 68/120, 5345s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 69/120, 5419s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 70/120, 5491s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 71/120, 5566s, MemAvailable 8 GiB, torch allocated 79 reserved 79 GiB
+  trial 72/120, 5639s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 73/120, 5715s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 74/120, 5792s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 75/120, 5864s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 76/120, 5938s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 77/120, 6016s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 78/120, 6092s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 79/120, 6169s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 80/120, 6246s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 81/120, 6320s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 82/120, 6396s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 83/120, 6471s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 84/120, 6549s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 85/120, 6626s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 86/120, 6698s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 87/120, 6771s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 88/120, 6846s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 89/120, 6922s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 90/120, 6999s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 91/120, 7073s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 92/120, 7149s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 93/120, 7223s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 94/120, 7297s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 95/120, 7372s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 96/120, 7449s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 97/120, 7524s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 98/120, 7598s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 99/120, 7672s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 100/120, 7744s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 101/120, 7821s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 102/120, 7898s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 103/120, 7974s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 104/120, 8048s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 105/120, 8123s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 106/120, 8194s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 107/120, 8264s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 108/120, 8340s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 109/120, 8416s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 110/120, 8489s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 111/120, 8562s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 112/120, 8636s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 113/120, 8709s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 114/120, 8783s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 115/120, 8855s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 116/120, 8932s, MemAvailable 9 GiB, torch allocated 79 reserved 79 GiB
+  trial 117/120, 9005s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 118/120, 9081s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 119/120, 9156s, MemAvailable 3 GiB, torch allocated 79 reserved 79 GiB
+  trial 120/120, 9230s, MemAvailable 7 GiB, torch allocated 79 reserved 79 GiB
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/mv/repos/jacobian-lens/hlens/experiments/h9_replication.py", line 76, in <module>
+    print(json.dumps(res, indent=1))
+      ^^^^^^^^^^^^^
+  File "/home/mv/repos/jacobian-lens/hlens/experiments/h9_replication.py", line 48, in analyze
+    valid = [r for r in rows if r.get("validity", {}).get("score", 0) >= 1]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mv/repos/jacobian-lens/hlens/experiments/h9_replication.py", line 48, in <listcomp>
+    valid = [r for r in rows if r.get("validity", {}).get("score", 0) >= 1]
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>=' not supported between instances of 'NoneType' and 'int'
+EXIT CODE 1 at Sat Oct 17 03:07:13 AM EST 2026
+final result missing; analyzing the checkpoint
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/mv/repos/jacobian-lens/hlens/experiments/h9_replication.py", line 71, in <module>
+    res = analyze(rows)
+          ^^^^^^^^^^^^^
+  File "/home/mv/repos/jacobian-lens/hlens/experiments/h9_replication.py", line 48, in analyze
+    valid = [r for r in rows if r.get("validity", {}).get("score", 0) >= 1]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mv/repos/jacobian-lens/hlens/experiments/h9_replication.py", line 48, in <listcomp>
+    valid = [r for r in rows if r.get("validity", {}).get("score", 0) >= 1]
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: '>=' not supported between instances of 'NoneType' and 'int'
+FINISHED Sat Oct 17 03:07:45 AM EST 2026

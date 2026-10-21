@@ -1,0 +1,70 @@
+START Mon Oct 19 09:04:11 AM EST 2026
+Fetching 15 files:   0%|          | 0/15 [00:00<?, ?it/s]Fetching 15 files: 100%|██████████| 15/15 [00:00<00:00, 16337.20it/s]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  27%|██▋       | 226/851 [00:00<00:00, 2255.76it/s]Loading weights:  53%|█████▎    | 452/851 [00:00<00:00, 2152.73it/s]Loading weights:  79%|███████▊  | 669/851 [00:00<00:00, 2158.75it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 2169.99it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1439.86it/s]
+qwen3.6-27b (mixed precision): 24 trials, src 24 tgt 41 mid 33
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  trial 1/24, 278s, MemAvailable 6 GiB, torch allocated 79 reserved 79 GiB
+  trial 2/24, 335s, MemAvailable 6 GiB, torch allocated 79 reserved 79 GiB
+  trial 3/24, 386s, MemAvailable 3 GiB, torch allocated 79 reserved 79 GiB
+  trial 4/24, 447s, MemAvailable 4 GiB, torch allocated 79 reserved 79 GiB
+  trial 5/24, 510s, MemAvailable 4 GiB, torch allocated 79 reserved 79 GiB
+  trial 6/24, 575s, MemAvailable 2 GiB, torch allocated 79 reserved 79 GiB
+  trial 7/24, 641s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 8/24, 705s, MemAvailable 5 GiB, torch allocated 79 reserved 79 GiB
+  trial 9/24, 775s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 10/24, 841s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 11/24, 907s, MemAvailable 5 GiB, torch allocated 79 reserved 79 GiB
+  trial 12/24, 969s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 13/24, 1033s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 14/24, 1097s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 15/24, 1161s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 16/24, 1225s, MemAvailable 6 GiB, torch allocated 79 reserved 79 GiB
+  trial 17/24, 1286s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 18/24, 1349s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 19/24, 1412s, MemAvailable 5 GiB, torch allocated 79 reserved 79 GiB
+  trial 20/24, 1473s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 21/24, 1541s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 22/24, 1605s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 23/24, 1668s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+  trial 24/24, 1731s, MemAvailable 1 GiB, torch allocated 79 reserved 79 GiB
+{
+ "all": {
+  "n_trials": 24,
+  "P0a": {
+   "median_I_at_threshold": -0.0009913547546602786,
+   "p": 0.9463087320327759,
+   "passed": false
+  },
+  "P0b": {
+   "median_I_threshold_minus_flank": -0.0021906921465415508,
+   "p": 0.9967419505119324,
+   "passed": false
+  },
+  "P0c": {
+   "median_I_control": 4.998298027203418e-05,
+   "p": 0.9322359561920166,
+   "passed": false
+  },
+  "exploratory": {
+   "frac_both_cross_terms_negative_at_threshold": 0.08333333333333333,
+   "median_I_by_offset": {
+    "-0.2": 0.001186353802040685,
+    "0.0": -0.0009913547546602786,
+    "0.2": 0.001452699478249997
+   },
+   "median_first_order_cross": -0.04073733789846301
+  },
+  "precondition_met": false
+ },
+ "valid_only": {
+  "n_trials": 0,
+  "note": "fewer than 8 valid trials"
+ },
+ "n_valid": 0
+}
+EXIT CODE 0 at Mon Oct 19 09:33:56 AM EST 2026
+FINISHED Mon Oct 19 09:33:56 AM EST 2026

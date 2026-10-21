@@ -1,0 +1,450 @@
+START Tue Oct 20 11:18:06 AM EST 2026
+Loading weights:   0%|          | 0/1065 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1065 [00:00<08:00,  2.22it/s]Loading weights:   5%|▌         | 56/1065 [00:00<00:07, 129.20it/s]Loading weights:   8%|▊         | 85/1065 [00:00<00:06, 146.10it/s]Loading weights:  10%|█         | 109/1065 [00:00<00:06, 145.68it/s]Loading weights:  12%|█▏        | 131/1065 [00:00<00:05, 161.14it/s]Loading weights:  14%|█▍        | 152/1065 [00:01<00:05, 160.48it/s]Loading weights:  16%|█▌        | 171/1065 [00:01<00:05, 165.45it/s]Loading weights:  18%|█▊        | 190/1065 [00:01<00:05, 157.46it/s]Loading weights:  20%|█▉        | 208/1065 [00:01<00:05, 162.73it/s]Loading weights:  21%|██        | 226/1065 [00:01<00:05, 149.26it/s]Loading weights:  23%|██▎       | 247/1065 [00:01<00:05, 153.68it/s]Loading weights:  25%|██▍       | 263/1065 [00:01<00:05, 155.05it/s]Loading weights:  26%|██▌       | 279/1065 [00:01<00:05, 150.84it/s]Loading weights:  28%|██▊       | 300/1065 [00:02<00:04, 158.68it/s]Loading weights:  30%|██▉       | 317/1065 [00:02<00:04, 154.72it/s]Loading weights:  32%|███▏      | 339/1065 [00:02<00:04, 167.86it/s]Loading weights:  33%|███▎      | 356/1065 [00:02<00:04, 148.76it/s]Loading weights:  35%|███▌      | 378/1065 [00:02<00:04, 160.94it/s]Loading weights:  37%|███▋      | 395/1065 [00:02<00:04, 153.60it/s]Loading weights:  39%|███▉      | 418/1065 [00:02<00:03, 165.56it/s]Loading weights:  41%|████      | 435/1065 [00:02<00:04, 142.86it/s]Loading weights:  43%|████▎     | 455/1065 [00:03<00:03, 156.32it/s]Loading weights:  44%|████▍     | 472/1065 [00:03<00:03, 153.13it/s]Loading weights:  46%|████▋     | 495/1065 [00:03<00:03, 165.37it/s]Loading weights:  48%|████▊     | 512/1065 [00:03<00:03, 155.77it/s]Loading weights:  50%|█████     | 533/1065 [00:03<00:03, 160.38it/s]Loading weights:  52%|█████▏    | 550/1065 [00:03<00:03, 151.42it/s]Loading weights:  54%|█████▎    | 572/1065 [00:03<00:02, 166.12it/s]Loading weights:  55%|█████▌    | 589/1065 [00:03<00:03, 149.78it/s]Loading weights:  57%|█████▋    | 611/1065 [00:04<00:02, 156.16it/s]Loading weights:  67%|██████▋   | 711/1065 [00:04<00:00, 366.57it/s]Loading weights:  81%|████████  | 860/1065 [00:04<00:00, 656.32it/s]Loading weights:  95%|█████████▌| 1012/1065 [00:04<00:00, 889.01it/s]Loading weights: 100%|██████████| 1065/1065 [00:04<00:00, 241.51it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1288.18it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  5/165 items, 154s
+  10/165 items, 296s
+  15/165 items, 436s
+  20/165 items, 577s
+  25/165 items, 718s
+  30/165 items, 858s
+  35/165 items, 999s
+  40/165 items, 1140s
+  45/165 items, 1281s
+  50/165 items, 1422s
+  55/165 items, 1562s
+  60/165 items, 1703s
+  65/165 items, 1845s
+  70/165 items, 1985s
+  75/165 items, 2126s
+  80/165 items, 2267s
+  85/165 items, 2408s
+  90/165 items, 2549s
+  95/165 items, 2690s
+  100/165 items, 2831s
+  105/165 items, 2971s
+  110/165 items, 3113s
+  115/165 items, 3254s
+  120/165 items, 3405s
+  125/165 items, 3551s
+  130/165 items, 3703s
+  135/165 items, 3855s
+  140/165 items, 4012s
+  145/165 items, 4164s
+  150/165 items, 4311s
+  155/165 items, 4468s
+  160/165 items, 4614s
+  165/165 items, 4756s
+{
+ "hit_a1": {
+  "label": "hit_a1",
+  "n": 138,
+  "n_fail": 81,
+  "n_success": 57,
+  "auc": {
+   "tau_L18": {
+    "auc": 0.289,
+    "ci95": [
+     0.208,
+     0.379
+    ],
+    "perm_p": 1.0
+   },
+   "tau_L24": {
+    "auc": 0.259,
+    "ci95": [
+     0.179,
+     0.344
+    ],
+    "perm_p": 1.0
+   },
+   "tau_L30": {
+    "auc": 0.446,
+    "ci95": [
+     0.355,
+     0.541
+    ],
+    "perm_p": 0.8631
+   },
+   "tau_mean": {
+    "auc": 0.283,
+    "ci95": [
+     0.2,
+     0.372
+    ],
+    "perm_p": 1.0
+   },
+   "tau_max": {
+    "auc": 0.281,
+    "ci95": [
+     0.198,
+     0.368
+    ],
+    "perm_p": 1.0
+   },
+   "baseline_neg_loading_L18": {
+    "auc": 0.567,
+    "ci95": [
+     0.47,
+     0.668
+    ],
+    "perm_p": 0.1049
+   },
+   "baseline_neg_loading_L24": {
+    "auc": 0.691,
+    "ci95": [
+     0.6,
+     0.774
+    ],
+    "perm_p": 0.0005
+   },
+   "baseline_neg_loading_L30": {
+    "auc": 0.55,
+    "ci95": [
+     0.452,
+     0.644
+    ],
+    "perm_p": 0.1714
+   },
+   "baseline_neg_loading_mean": {
+    "auc": 0.591,
+    "ci95": [
+     0.497,
+     0.684
+    ],
+    "perm_p": 0.043
+   },
+   "baseline_neg_jdelta_mean": {
+    "auc": 0.646,
+    "ci95": [
+     0.551,
+     0.736
+    ],
+    "perm_p": 0.0035
+   },
+   "num_mean": {
+    "auc": 0.31,
+    "ci95": [
+     0.224,
+     0.4
+    ],
+    "perm_p": 1.0
+   },
+   "baseline_delta_norm_mean": {
+    "auc": 0.394,
+    "ci95": [
+     0.297,
+     0.493
+    ],
+    "perm_p": 0.9805
+   },
+   "tau_L16": {
+    "auc": 0.259,
+    "ci95": [
+     0.179,
+     0.344
+    ],
+    "perm_p": 1.0
+   },
+   "baseline_neg_loading_L16": {
+    "auc": 0.691,
+    "ci95": [
+     0.6,
+     0.774
+    ],
+    "perm_p": 0.0005
+   }
+  },
+  "spearman_tau16_vs_loading16": 0.462,
+  "spearman_tau16_vs_jdelta16": 0.437,
+  "loo_logistic_auc": {
+   "loading16": 0.671,
+   "log_tau16": 0.728,
+   "loading16+log_tau16": 0.723
+  },
+  "mid_layer": 24,
+  "stratified_by_geography": {
+   "tau_L16": {
+    "stratified_auc": 0.364,
+    "p_greater": 0.9937,
+    "p_less": 0.007
+   },
+   "tau_mean": {
+    "stratified_auc": 0.41,
+    "p_greater": 0.9497,
+    "p_less": 0.0516
+   },
+   "baseline_neg_loading_L16": {
+    "stratified_auc": 0.561,
+    "p_greater": 0.138,
+    "p_less": 0.8644
+   },
+   "baseline_neg_jdelta_mean": {
+    "stratified_auc": 0.615,
+    "p_greater": 0.0153,
+    "p_less": 0.985
+   },
+   "num_mean": {
+    "stratified_auc": 0.395,
+    "p_greater": 0.9687,
+    "p_less": 0.032
+   }
+  },
+  "within_group_tau16": {
+   "geography": {
+    "n": 107,
+    "n_fail": 51,
+    "auc_tau16": 0.359
+   },
+   "other": {
+    "n": 31,
+    "n_fail": 30,
+    "auc_tau16": 0.867
+   }
+  },
+  "by_category": {
+   "city-capital": {
+    "n": 32,
+    "success": 13,
+    "mean_tau16": 1.479
+   },
+   "city-continent": {
+    "n": 25,
+    "success": 20,
+    "mean_tau16": 1.195
+   },
+   "city-currency": {
+    "n": 13,
+    "success": 0,
+    "mean_tau16": 1.756
+   },
+   "city-language": {
+    "n": 29,
+    "success": 19,
+    "mean_tau16": 1.468
+   },
+   "element-state": {
+    "n": 13,
+    "success": 1,
+    "mean_tau16": 0.312
+   },
+   "element-symbol": {
+    "n": 18,
+    "success": 0,
+    "mean_tau16": 0.583
+   },
+   "language-capital": {
+    "n": 8,
+    "success": 4,
+    "mean_tau16": 1.329
+   }
+  }
+ },
+ "hit_a1.25": {
+  "label": "hit_a1.25",
+  "n": 138,
+  "n_fail": 133,
+  "n_success": 5,
+  "auc": {
+   "tau_L18": {
+    "auc": 0.427,
+    "ci95": [
+     0.125,
+     0.757
+    ],
+    "perm_p": 0.7151
+   },
+   "tau_L24": {
+    "auc": 0.436,
+    "ci95": [
+     0.048,
+     0.815
+    ],
+    "perm_p": 0.7001
+   },
+   "tau_L30": {
+    "auc": 0.52,
+    "ci95": [
+     0.256,
+     0.839
+    ],
+    "perm_p": 0.4503
+   },
+   "tau_mean": {
+    "auc": 0.43,
+    "ci95": [
+     0.079,
+     0.784
+    ],
+    "perm_p": 0.7041
+   },
+   "tau_max": {
+    "auc": 0.445,
+    "ci95": [
+     0.051,
+     0.808
+    ],
+    "perm_p": 0.6722
+   },
+   "baseline_neg_loading_L18": {
+    "auc": 0.768,
+    "ci95": [
+     0.578,
+     0.934
+    ],
+    "perm_p": 0.02
+   },
+   "baseline_neg_loading_L24": {
+    "auc": 0.677,
+    "ci95": [
+     0.454,
+     0.912
+    ],
+    "perm_p": 0.0765
+   },
+   "baseline_neg_loading_L30": {
+    "auc": 0.856,
+    "ci95": [
+     0.697,
+     0.986
+    ],
+    "perm_p": 0.003
+   },
+   "baseline_neg_loading_mean": {
+    "auc": 0.842,
+    "ci95": [
+     0.692,
+     0.971
+    ],
+    "perm_p": 0.0035
+   },
+   "baseline_neg_jdelta_mean": {
+    "auc": 0.614,
+    "ci95": [
+     0.239,
+     0.938
+    ],
+    "perm_p": 0.1874
+   },
+   "num_mean": {
+    "auc": 0.38,
+    "ci95": [
+     0.015,
+     0.757
+    ],
+    "perm_p": 0.8266
+   },
+   "baseline_delta_norm_mean": {
+    "auc": 0.349,
+    "ci95": [
+     0.116,
+     0.741
+    ],
+    "perm_p": 0.8701
+   },
+   "tau_L16": {
+    "auc": 0.436,
+    "ci95": [
+     0.048,
+     0.815
+    ],
+    "perm_p": 0.7001
+   },
+   "baseline_neg_loading_L16": {
+    "auc": 0.677,
+    "ci95": [
+     0.454,
+     0.912
+    ],
+    "perm_p": 0.0765
+   }
+  },
+  "spearman_tau16_vs_loading16": 0.462,
+  "spearman_tau16_vs_jdelta16": 0.437,
+  "loo_logistic_auc": {
+   "loading16": 0.402,
+   "log_tau16": 0.0,
+   "loading16+log_tau16": 0.212
+  },
+  "mid_layer": 24,
+  "stratified_by_geography": {
+   "tau_L16": {
+    "stratified_auc": 0.412,
+    "p_greater": 0.7298,
+    "p_less": 0.2742
+   },
+   "tau_mean": {
+    "stratified_auc": 0.407,
+    "p_greater": 0.7414,
+    "p_less": 0.2666
+   },
+   "baseline_neg_loading_L16": {
+    "stratified_auc": 0.615,
+    "p_greater": 0.2086,
+    "p_less": 0.7957
+   },
+   "baseline_neg_jdelta_mean": {
+    "stratified_auc": 0.704,
+    "p_greater": 0.0796,
+    "p_less": 0.925
+   },
+   "num_mean": {
+    "stratified_auc": 0.312,
+    "p_greater": 0.9077,
+    "p_less": 0.0946
+   }
+  },
+  "within_group_tau16": {
+   "geography": {
+    "n": 107,
+    "n_fail": 103,
+    "auc_tau16": 0.369
+   },
+   "other": {
+    "n": 31,
+    "n_fail": 30,
+    "auc_tau16": 1.0
+   }
+  },
+  "by_category": {
+   "city-capital": {
+    "n": 32,
+    "success": 1,
+    "mean_tau16": 1.479
+   },
+   "city-continent": {
+    "n": 25,
+    "success": 0,
+    "mean_tau16": 1.195
+   },
+   "city-currency": {
+    "n": 13,
+    "success": 1,
+    "mean_tau16": 1.756
+   },
+   "city-language": {
+    "n": 29,
+    "success": 0,
+    "mean_tau16": 1.468
+   },
+   "element-state": {
+    "n": 13,
+    "success": 0,
+    "mean_tau16": 0.312
+   },
+   "element-symbol": {
+    "n": 18,
+    "success": 1,
+    "mean_tau16": 0.583
+   },
+   "language-capital": {
+    "n": 8,
+    "success": 2,
+    "mean_tau16": 1.329
+   }
+  }
+ }
+}
+run exit 0 Tue Oct 20 12:37:54 PM EST 2026
+ALL DONE Tue Oct 20 12:37:54 PM EST 2026

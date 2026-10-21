@@ -1,0 +1,129 @@
+START Sat Oct 17 08:45:34 PM EST 2026
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 6105.25it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<02:10,  3.25it/s]Loading weights:  18%|█▊        | 76/426 [00:00<00:01, 238.32it/s]Loading weights:  28%|██▊       | 120/426 [00:00<00:01, 260.43it/s]Loading weights:  37%|███▋      | 157/426 [00:00<00:00, 285.87it/s]Loading weights:  46%|████▌     | 194/426 [00:00<00:00, 304.57it/s]Loading weights:  54%|█████▍    | 230/426 [00:00<00:00, 298.15it/s]Loading weights:  62%|██████▏   | 264/426 [00:01<00:00, 299.73it/s]Loading weights:  71%|███████   | 302/426 [00:01<00:00, 313.53it/s]Loading weights:  79%|███████▉  | 336/426 [00:01<00:00, 316.49it/s]Loading weights:  87%|████████▋ | 369/426 [00:01<00:00, 304.27it/s]Loading weights:  95%|█████████▌| 406/426 [00:01<00:00, 318.21it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 281.07it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1503.33it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  register: 1 trials, 36s
+  register: 2 trials, 66s
+  register: 3 trials, 95s
+  register: 4 trials, 123s
+  register: 5 trials, 151s
+  register: 6 trials, 179s
+  register: 7 trials, 207s
+  register: 8 trials, 235s
+  register: 9 trials, 264s
+  register: 10 trials, 292s
+  register: 11 trials, 322s
+  register: 12 trials, 352s
+  register: 13 trials, 381s
+  register: 14 trials, 411s
+  register: 15 trials, 441s
+  register: 16 trials, 471s
+  register: 17 trials, 501s
+  register: 18 trials, 531s
+  register: 19 trials, 561s
+  register: 20 trials, 591s
+  register: 21 trials, 617s
+  register: 22 trials, 643s
+  register: 23 trials, 670s
+  register: 24 trials, 696s
+  register: 25 trials, 723s
+  register: 26 trials, 749s
+  register: 27 trials, 776s
+  register: 28 trials, 802s
+  register: 29 trials, 829s
+  register: 30 trials, 855s
+  register: 31 trials, 884s
+  register: 32 trials, 912s
+  register: 33 trials, 940s
+  register: 34 trials, 968s
+  register: 35 trials, 996s
+  register: 36 trials, 1024s
+  register: 37 trials, 1053s
+  register: 38 trials, 1081s
+  register: 39 trials, 1109s
+  register: 40 trials, 1137s
+  register: 41 trials, 1166s
+  register: 42 trials, 1195s
+  register: 43 trials, 1223s
+  register: 44 trials, 1252s
+  register: 45 trials, 1281s
+  register: 46 trials, 1309s
+  register: 47 trials, 1338s
+  register: 48 trials, 1367s
+  register: 49 trials, 1396s
+  register: 50 trials, 1424s
+  register: 51 trials, 1452s
+  register: 52 trials, 1481s
+  register: 53 trials, 1509s
+  register: 54 trials, 1537s
+  register: 55 trials, 1565s
+  register: 56 trials, 1594s
+  register: 57 trials, 1622s
+  register: 58 trials, 1650s
+  register: 59 trials, 1678s
+  register: 60 trials, 1706s
+  persona: 1 trials, 1735s
+  persona: 2 trials, 1763s
+  persona: 3 trials, 1791s
+  persona: 4 trials, 1819s
+  persona: 5 trials, 1847s
+  persona: 6 trials, 1876s
+  persona: 7 trials, 1904s
+  persona: 8 trials, 1932s
+  persona: 9 trials, 1960s
+  persona: 10 trials, 1989s
+  persona: 11 trials, 2019s
+  persona: 12 trials, 2048s
+  persona: 13 trials, 2078s
+  persona: 14 trials, 2108s
+  persona: 15 trials, 2138s
+  persona: 16 trials, 2168s
+  persona: 17 trials, 2198s
+  persona: 18 trials, 2228s
+  persona: 19 trials, 2258s
+  persona: 20 trials, 2288s
+  persona: 21 trials, 2315s
+  persona: 22 trials, 2342s
+  persona: 23 trials, 2368s
+  persona: 24 trials, 2395s
+  persona: 25 trials, 2422s
+  persona: 26 trials, 2448s
+  persona: 27 trials, 2475s
+  persona: 28 trials, 2502s
+  persona: 29 trials, 2528s
+  persona: 30 trials, 2555s
+  persona: 31 trials, 2583s
+  persona: 32 trials, 2611s
+  persona: 33 trials, 2639s
+  persona: 34 trials, 2667s
+  persona: 35 trials, 2696s
+  persona: 36 trials, 2724s
+  persona: 37 trials, 2752s
+  persona: 38 trials, 2780s
+  persona: 39 trials, 2808s
+  persona: 40 trials, 2836s
+  persona: 41 trials, 2865s
+  persona: 42 trials, 2894s
+  persona: 43 trials, 2923s
+  persona: 44 trials, 2951s
+  persona: 45 trials, 2980s
+  persona: 46 trials, 3009s
+  persona: 47 trials, 3038s
+  persona: 48 trials, 3066s
+  persona: 49 trials, 3095s
+  persona: 50 trials, 3124s
+  persona: 51 trials, 3152s
+  persona: 52 trials, 3180s
+  persona: 53 trials, 3208s
+  persona: 54 trials, 3237s
+  persona: 55 trials, 3265s
+  persona: 56 trials, 3293s
+  persona: 57 trials, 3321s
+  persona: 58 trials, 3349s
+  persona: 59 trials, 3377s
+  persona: 60 trials, 3406s
+run exit 0 Sat Oct 17 09:42:30 PM EST 2026
+analyze exit 0 Sat Oct 17 09:42:32 PM EST 2026
+ALL DONE Sat Oct 17 09:42:32 PM EST 2026

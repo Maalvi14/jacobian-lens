@@ -1,0 +1,25 @@
+START Mon Oct 19 01:02:19 PM EST 2026
+Loading weights:   0%|          | 0/1065 [00:00<?, ?it/s]Loading weights:   0%|          | 1/1065 [00:00<07:37,  2.32it/s]Loading weights:   5%|▍         | 53/1065 [00:00<00:07, 128.30it/s]Loading weights:   8%|▊         | 82/1065 [00:00<00:07, 136.51it/s]Loading weights:  10%|█         | 107/1065 [00:00<00:07, 136.61it/s]Loading weights:  12%|█▏        | 133/1065 [00:01<00:06, 148.84it/s]Loading weights:  15%|█▍        | 157/1065 [00:01<00:05, 160.44it/s]Loading weights:  17%|█▋        | 176/1065 [00:01<00:05, 159.04it/s]Loading weights:  18%|█▊        | 195/1065 [00:01<00:05, 163.51it/s]Loading weights:  20%|██        | 213/1065 [00:01<00:05, 152.73it/s]Loading weights:  22%|██▏       | 234/1065 [00:01<00:05, 165.85it/s]Loading weights:  24%|██▎       | 252/1065 [00:01<00:05, 151.29it/s]Loading weights:  26%|██▌       | 273/1065 [00:01<00:04, 160.51it/s]Loading weights:  27%|██▋       | 290/1065 [00:02<00:05, 150.60it/s]Loading weights:  30%|██▉       | 315/1065 [00:02<00:04, 150.02it/s]Loading weights:  32%|███▏      | 338/1065 [00:02<00:04, 165.70it/s]Loading weights:  33%|███▎      | 356/1065 [00:02<00:04, 156.35it/s]Loading weights:  35%|███▌      | 375/1065 [00:02<00:04, 163.14it/s]Loading weights:  37%|███▋      | 393/1065 [00:02<00:04, 154.42it/s]Loading weights:  39%|███▉      | 414/1065 [00:02<00:03, 167.19it/s]Loading weights:  41%|████      | 432/1065 [00:02<00:04, 151.20it/s]Loading weights:  43%|████▎     | 457/1065 [00:03<00:03, 171.19it/s]Loading weights:  45%|████▍     | 475/1065 [00:03<00:03, 155.06it/s]Loading weights:  46%|████▌     | 492/1065 [00:03<00:03, 157.66it/s]Loading weights:  48%|████▊     | 510/1065 [00:03<00:03, 151.14it/s]Loading weights:  50%|████▉     | 531/1065 [00:03<00:03, 158.30it/s]Loading weights:  52%|█████▏    | 549/1065 [00:03<00:03, 150.34it/s]Loading weights:  53%|█████▎    | 565/1065 [00:03<00:03, 148.37it/s]Loading weights:  55%|█████▌    | 588/1065 [00:03<00:03, 145.52it/s]Loading weights:  57%|█████▋    | 612/1065 [00:04<00:02, 163.20it/s]Loading weights:  68%|██████▊   | 719/1065 [00:04<00:00, 388.00it/s]Loading weights:  82%|████████▏ | 877/1065 [00:04<00:00, 696.07it/s]Loading weights:  97%|█████████▋| 1034/1065 [00:04<00:00, 932.96it/s]Loading weights: 100%|██████████| 1065/1065 [00:04<00:00, 241.73it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 2037.06it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+lens_12_18: n=24 I=+0.0005 p=['2e-06', '0.048', '3.3e-06'] bothneg=0.83 bonf=False
+lens_12_24: n=24 I=+0.0002 p=['0.00028', '0.084', '0.00055'] bothneg=0.46 bonf=False
+lens_12_30: n=24 I=+0.0002 p=['0.0022', '0.79', '0.0024'] bothneg=0.42 bonf=False
+lens_18_24: n=24 I=+0.0000 p=['0.0011', '0.51', '0.0007'] bothneg=0.58 bonf=False
+lens_18_30: n=24 I=+0.0001 p=['0.0027', '0.69', '0.0024'] bothneg=0.29 bonf=False
+lens_18_36: n=24 I=+0.0002 p=['0.00032', '1', '0.00028'] bothneg=0.58 bonf=False
+lens_24_30: n=24 I=+0.0002 p=['0.00037', '0.69', '0.00042'] bothneg=0.50 bonf=False
+lens_24_36: n=24 I=+0.0003 p=['5.4e-05', '1', '5.4e-05'] bothneg=0.58 bonf=False
+lens_24_42: n=24 I=+0.0004 p=['0.0007', '0.97', '0.0007'] bothneg=0.79 bonf=False
+identity_12_18: n=24 I=+0.0000 p=['0.19', '0.62', '0.44'] bothneg=0.33 bonf=False
+identity_12_24: n=24 I=+0.0000 p=['0.023', '0.38', '0.12'] bothneg=0.42 bonf=False
+identity_12_30: n=24 I=+0.0001 p=['0.0011', '0.96', '0.0069'] bothneg=0.58 bonf=False
+identity_18_24: n=24 I=-0.0000 p=['1', '0.99', '1'] bothneg=0.04 bonf=False
+identity_18_30: n=24 I=+0.0000 p=['1.8e-05', '0.86', '0.00042'] bothneg=0.38 bonf=False
+identity_18_36: n=24 I=+0.0001 p=['6e-07', '0.98', '1.1e-06'] bothneg=0.58 bonf=False
+identity_24_30: n=24 I=+0.0000 p=['1.2e-07', '0.73', '3e-07'] bothneg=0.54 bonf=False
+identity_24_36: n=24 I=+0.0001 p=['6e-08', '1', '6e-08'] bothneg=0.67 bonf=False
+identity_24_42: n=24 I=-0.0000 p=['0.7', '0.98', '0.64'] bothneg=0.38 bonf=False
+scan exit 0 Mon Oct 19 03:38:36 PM EST 2026
+ALL DONE Mon Oct 19 03:38:36 PM EST 2026

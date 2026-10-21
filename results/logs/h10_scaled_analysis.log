@@ -1,0 +1,250 @@
+{
+ "signature": {
+  "persona": {
+   "a_threshold_fraction": 1.0,
+   "a_pass": true,
+   "b_width_shrinks_fraction": 1.0,
+   "b_pass": true,
+   "c_per_layer": {
+    "4": {
+     "frac_center_gt_flank": 0.865,
+     "p": 1.1280170583490516e-28,
+     "median_lambda": 7.559190432308025
+    },
+    "12": {
+     "frac_center_gt_flank": 0.59,
+     "p": 0.00032291897539998105,
+     "median_lambda": 0.9729458472912735
+    },
+    "16": {
+     "frac_center_gt_flank": 0.655,
+     "p": 8.703982489907289e-09,
+     "median_lambda": 2.315121060059787
+    },
+    "20": {
+     "frac_center_gt_flank": 0.84,
+     "p": 1.1520756463721294e-26,
+     "median_lambda": 1.7298447998734598
+    },
+    "24": {
+     "frac_center_gt_flank": 0.805,
+     "p": 5.539324336769513e-23,
+     "median_lambda": 0.4781388313402082
+    }
+   },
+   "c_pass": true,
+   "reproduces_signature": true,
+   "median_width": {
+    "0": 0.6733222679600563,
+    "4": 0.5478702048155073,
+    "8": 0.48942197858446423,
+    "12": 0.4888448297830777,
+    "16": 0.4813893959370934,
+    "20": 0.4363214701331223,
+    "24": 0.3494729012684046
+   }
+  },
+  "synonym": {
+   "a_threshold_fraction": 1.0,
+   "a_pass": true,
+   "b_width_shrinks_fraction": 0.995,
+   "b_pass": true,
+   "c_per_layer": {
+    "4": {
+     "frac_center_gt_flank": 0.385,
+     "p": 0.9795126069569405,
+     "median_lambda": 4.735909058642042
+    },
+    "12": {
+     "frac_center_gt_flank": 0.585,
+     "p": 0.004895842923817505,
+     "median_lambda": 1.0914254645632882
+    },
+    "16": {
+     "frac_center_gt_flank": 0.48,
+     "p": 0.1512601391897722,
+     "median_lambda": 2.475122240121589
+    },
+    "20": {
+     "frac_center_gt_flank": 0.595,
+     "p": 0.00024179354368108867,
+     "median_lambda": 1.5142990223722892
+    },
+    "24": {
+     "frac_center_gt_flank": 0.67,
+     "p": 6.781355119731189e-10,
+     "median_lambda": 0.5279925197619826
+    }
+   },
+   "c_pass": true,
+   "reproduces_signature": true,
+   "median_width": {
+    "0": 0.7076454637541232,
+    "4": 0.6294831050038245,
+    "8": 0.6208012315498218,
+    "12": 0.611124357189309,
+    "16": 0.6032922253877543,
+    "20": 0.5600964268598034,
+    "24": 0.49302975906207813
+   }
+  },
+  "control": {
+   "a_threshold_fraction": 1.0,
+   "a_pass": true,
+   "b_width_shrinks_fraction": 1.0,
+   "b_pass": true,
+   "c_per_layer": {
+    "4": {
+     "frac_center_gt_flank": 0.875,
+     "p": 1.2238055880161167e-28,
+     "median_lambda": 6.9923343977301045
+    },
+    "12": {
+     "frac_center_gt_flank": 0.495,
+     "p": 0.4781060153496591,
+     "median_lambda": 0.8658967534998361
+    },
+    "16": {
+     "frac_center_gt_flank": 0.655,
+     "p": 4.4240236451346036e-10,
+     "median_lambda": 2.611114769994436
+    },
+    "20": {
+     "frac_center_gt_flank": 0.87,
+     "p": 5.825248042437286e-27,
+     "median_lambda": 1.8899143614416496
+    },
+    "24": {
+     "frac_center_gt_flank": 0.91,
+     "p": 3.0488142592444644e-30,
+     "median_lambda": 0.6211306000670608
+    }
+   },
+   "c_pass": true,
+   "reproduces_signature": true,
+   "median_width": {
+    "0": 0.6772603198565872,
+    "4": 0.5666570883891009,
+    "8": 0.49589991703206815,
+    "12": 0.49580892583482966,
+    "16": 0.4916501789079291,
+    "20": 0.43300511778412293,
+    "24": 0.33520611320541216
+   }
+  },
+  "countries": {
+   "a_threshold_fraction": 1.0,
+   "a_pass": true,
+   "b_width_shrinks_fraction": 1.0,
+   "b_pass": true,
+   "c_per_layer": {
+    "4": {
+     "frac_center_gt_flank": 0.7272727272727273,
+     "p": 2.549066184543406e-13,
+     "median_lambda": 6.410136345675605
+    },
+    "12": {
+     "frac_center_gt_flank": 0.5227272727272727,
+     "p": 0.8611874673348882,
+     "median_lambda": 0.8964419026722282
+    },
+    "16": {
+     "frac_center_gt_flank": 0.5984848484848485,
+     "p": 6.914662823111454e-05,
+     "median_lambda": 2.7508560231631822
+    },
+    "20": {
+     "frac_center_gt_flank": 0.946969696969697,
+     "p": 5.899202905970741e-22,
+     "median_lambda": 2.1867613088891873
+    },
+    "24": {
+     "frac_center_gt_flank": 0.8712121212121212,
+     "p": 6.652450449332122e-20,
+     "median_lambda": 0.47173873649642606
+    }
+   },
+   "c_pass": true,
+   "reproduces_signature": true,
+   "median_width": {
+    "0": 0.7134944289760558,
+    "4": 0.6756082507025687,
+    "8": 0.6130197386628153,
+    "12": 0.5964132465342957,
+    "16": 0.586400227791616,
+    "20": 0.5085594058461465,
+    "24": 0.42863209532561186
+   }
+  }
+ },
+ "n_pairs": {
+  "persona": 100,
+  "synonym": 100,
+  "control": 100,
+  "countries": 66
+ },
+ "median_dbar": {
+  "persona": 0.3032410411667892,
+  "synonym": 0.05753901308186953,
+  "control": 0.36413569295722925,
+  "countries": 0.4937867381320388
+ },
+ "median_d": {
+  "persona": 1.0242078751325607,
+  "synonym": 0.8676875531673431,
+  "control": 1.0246165692806244,
+  "countries": 0.740019753575325
+ },
+ "matched_persona_minus_control": {
+  "n": 100,
+  "median_diff": -0.0432585705933415,
+  "wilcoxon_two_sided_p": 0.08009979252151697
+ },
+ "regression": {
+  "intercept": -0.6066422512388048,
+  "distance": {
+   "coef": 1.001052348115342,
+   "ci95": [
+    0.5440051474423802,
+    1.5074441071010667
+   ]
+  },
+  "persona": {
+   "coef": -0.09295783117613284,
+   "ci95": [
+    -0.17978485831862323,
+    -0.00634800755800928
+   ]
+  },
+  "synonym": {
+   "coef": -0.08644233097151141,
+   "ci95": [
+    -0.23400893184636481,
+    0.07285648301378306
+   ]
+  },
+  "equivalence_margin": 0.09103392323930731,
+  "persona_equivalent_to_control": false
+ },
+ "spearman_d_vs_dbar": {
+  "all_pairs": 0.18470369606627132,
+  "persona": 0.2958055805580558,
+  "synonym": 0.3309690969096909,
+  "control": 0.32898889888988897,
+  "countries": 0.23348293497547234
+ },
+ "persona_effect_beyond_distance": false,
+ "distance_explains": false,
+ "matching_quality": {
+  "median_abs_delta": 0.000371783971786499,
+  "max_abs_delta": 0.19901025295257568,
+  "median_rel": 0.0003629965955284028,
+  "max_rel": 0.1943065053340058,
+  "adequate": true
+ },
+ "prereg_sha256": {
+  "recorded": "5eb8e6f3a66891e00f0ef0f4cf2be364f48453d81fe01d2e11cb53166eae79db",
+  "pairs_file": "5eb8e6f3a66891e00f0ef0f4cf2be364f48453d81fe01d2e11cb53166eae79db",
+  "current": "5eb8e6f3a66891e00f0ef0f4cf2be364f48453d81fe01d2e11cb53166eae79db"
+ }
+}

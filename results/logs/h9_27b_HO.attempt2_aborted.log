@@ -1,0 +1,11 @@
+START Thu Oct 15 11:28:27 PM EST 2026
+Fetching 15 files:   0%|          | 0/15 [00:00<?, ?it/s]Fetching 15 files: 100%|██████████| 15/15 [00:00<00:00, 34952.53it/s]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  17%|█▋        | 146/851 [00:00<00:00, 1447.74it/s]Loading weights:  34%|███▍      | 291/851 [00:00<00:00, 1249.17it/s]Loading weights:  49%|████▉     | 418/851 [00:00<00:00, 1239.53it/s]Loading weights:  64%|██████▍   | 543/851 [00:00<00:00, 1222.09it/s]Loading weights:  78%|███████▊  | 666/851 [00:00<00:00, 1204.76it/s]Loading weights:  92%|█████████▏| 787/851 [00:00<00:00, 1167.33it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 1216.10it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 977.01it/s]
+qwen3.6-27b (mixed precision): 120 trials, src 24 tgt 41 mid 33
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+  trial 1/120, 250s, MemAvailable 1 GiB
+EXIT CODE 143 at Thu Oct 15 11:34:14 PM EST 2026

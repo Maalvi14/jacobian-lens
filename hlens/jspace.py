@@ -6,20 +6,19 @@ from dataclasses import dataclass
 from jlens import JacobianLens, LensModel
 from collections.abc import Sequence
 
-def lens_vectors(
-    lens: JacobianLens,
+def unembed_directions(
     model: LensModel,
-    layer: int,
     token_ids: Sequence[int],
     *,
     h_ref: torch.Tensor | None = None,
     dim_batch: int = 8,
 ) -> torch.Tensor:
-    if layer not in lens.source_layers:
-        raise ValueError(f"layer={layer} not in lens.source_layers={lens.source_layers}")
+    """u_t = d logit_t / d h_final for each token (autograd on `model.unembed` at a
+    reference point): [n_tokens, d_model], fp32 on CPU. Independent of the lens
+    layer, so compute it once and apply each layer's J_l afterwards."""
     if h_ref is None:
         h_ref = torch.ones(model.d_model)
-    
+
     n_tokens = len(token_ids)
     token_ids_tensor = torch.tensor(token_ids)
     u = torch.zeros(n_tokens, model.d_model, dtype=torch.float32)
@@ -38,10 +37,24 @@ def lens_vectors(
         grads = torch.autograd.grad(outputs=logits, inputs=batch_h, grad_outputs=cotangent)[0]
         u[start:end] = grads.float()
 
-    J_l = lens.jacobians[layer]
-    return u @ J_l
+    return u
 
-    
+
+def lens_vectors(
+    lens: JacobianLens,
+    model: LensModel,
+    layer: int,
+    token_ids: Sequence[int],
+    *,
+    h_ref: torch.Tensor | None = None,
+    dim_batch: int = 8,
+) -> torch.Tensor:
+    if layer not in lens.source_layers:
+        raise ValueError(f"layer={layer} not in lens.source_layers={lens.source_layers}")
+    u = unembed_directions(model, token_ids, h_ref=h_ref, dim_batch=dim_batch)
+    return u @ lens.jacobians[layer]
+
+
 def sparse_pursuit(
     h: torch.Tensor,
     dictionary: torch.Tensor,

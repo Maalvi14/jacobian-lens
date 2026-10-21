@@ -1,0 +1,113 @@
+{
+ "control_signature": {
+  "a_threshold_fraction": 1.0,
+  "a_pass": true,
+  "b_width_shrinks_fraction": 1.0,
+  "b_pass": true,
+  "c_per_layer": {
+   "4": {
+    "frac_center_gt_flank": 0.9666666666666667,
+    "p": 1.0488314032044357e-11,
+    "median_lambda": 15.900943931177
+   },
+   "12": {
+    "frac_center_gt_flank": 0.25,
+    "p": 0.9998994415944484,
+    "median_lambda": 0.8630575545028772
+   },
+   "16": {
+    "frac_center_gt_flank": 0.6,
+    "p": 0.008708187357706341,
+    "median_lambda": 2.4046602924916205
+   },
+   "20": {
+    "frac_center_gt_flank": 0.8166666666666667,
+    "p": 2.1198498235597423e-09,
+    "median_lambda": 2.072394175136167
+   },
+   "24": {
+    "frac_center_gt_flank": 0.9333333333333333,
+    "p": 1.7310450505256485e-11,
+    "median_lambda": 0.6758411181534955
+   }
+  },
+  "c_pass": true,
+  "reproduces_signature": true,
+  "median_width": {
+   "0": 0.6695133240019805,
+   "4": 0.5495767537028607,
+   "8": 0.4296943908041757,
+   "12": 0.4082603535959298,
+   "16": 0.39938705483678283,
+   "20": 0.37397200915375584,
+   "24": 0.2744646802029394
+  }
+ },
+ "persona_dbar": {
+  "judge-clown": 0.48263791757401253,
+  "monk-sailor": 0.597100792849204,
+  "queen-witch": 0.13656122829090386,
+  "chef-knight": 0.432580907373475,
+  "scientist-ghost": 0.3160235711779864,
+  "princess-vampire": 0.5342579330448337,
+  "mayor-dragon": 0.5045957611483581,
+  "banker-hunter": 0.24719805587812435,
+  "surgeon-outlaw": 0.1068451299763112,
+  "professor-giant": 0.36206741269402487
+ },
+ "register_dbar": {
+  "attorney-lawyer": 0.2711211008925053,
+  "infant-baby": -0.050097414903114645,
+  "footwear-shoes": 0.13763624743934816,
+  "employment-job": -0.018390957133795446,
+  "spectacles-glasses": 0.006534742250603354,
+  "gentleman-guy": -0.028151354132033853,
+  "youngster-kid": 0.02783944042805815,
+  "telephone-phone": 0.03689678639613676,
+  "currency-money": 0.06990684396015878,
+  "canine-dog": 0.007059798213753743
+ },
+ "control_dbar": {
+  "spoon-castle": 0.23553274452402462,
+  "bridge-cookie": 0.6937674667721261,
+  "kettle-compass": -0.028589754917713928,
+  "needle-tractor": 0.3735480616599054,
+  "rope-lemon": 0.9531113261166106,
+  "mountain-violin": 0.671746521337157,
+  "ladder-pizza": 2.223676816607225,
+  "bottle-saddle": 0.31135326906406424,
+  "anchor-pencil": 0.9026796289070983,
+  "umbrella-helmet": 0.3139012815186989
+ },
+ "primary_persona_gt_control": {
+  "p": 0.8462552716906593,
+  "passed": false,
+  "median_persona": 0.39732416003374993,
+  "median_control": 0.5226472914985312
+ },
+ "control_gt_register": {
+  "p": 0.0014136360455584039,
+  "median_register": 0.017449619320905947
+ },
+ "spearman_d_vs_dbar_all_pairs": 0.48120133481646277,
+ "persona_indicator_coef": {
+  "estimate": -0.29199440193152987,
+  "ci95": [
+   -0.7733678587153108,
+   0.03895483194167532
+  ]
+ },
+ "outcome": "control reproduces the signature; persona not larger",
+ "matching_quality": {
+  "median_abs_delta": 0.0015812416871389123,
+  "max_abs_delta": 0.027920305728912354,
+  "median_rel": 0.0014718635246026058,
+  "max_rel": 0.02598899329077015,
+  "adequate": true
+ },
+ "prereg_sha256": {
+  "recorded": "b604b95461710b36a0d7d56125655a7a425d8d7a377ec30d7fa1237b7ececc29",
+  "distances_file": "b604b95461710b36a0d7d56125655a7a425d8d7a377ec30d7fa1237b7ececc29",
+  "current": "b604b95461710b36a0d7d56125655a7a425d8d7a377ec30d7fa1237b7ececc29"
+ }
+}

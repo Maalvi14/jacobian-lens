@@ -1,0 +1,68 @@
+{
+ "prereg_sha256": {
+  "recorded": "3df0e5faa6c0f958f30e1710bb7ea7ca4ec19add6cf1763a9857e2f6ff63e3d9",
+  "current": "3df0e5faa6c0f958f30e1710bb7ea7ca4ec19add6cf1763a9857e2f6ff63e3d9"
+ },
+ "n": 138,
+ "n_success": 57,
+ "P1": {
+  "auc_N_for_success": 0.247346761966645,
+  "ci95": [
+   0.1693020947426068,
+   0.33121721351142086
+  ],
+  "perm_p": 1.0,
+  "stratified_auc": 0.3132363132363132,
+  "stratified_p": 0.9996000399960004,
+  "passed": false
+ },
+ "P2": {
+  "successes": 57,
+  "first_order_would_not_flip": 2,
+  "p_binomial": 0.9999999999999996,
+  "passed": false
+ },
+ "P4": {
+  "auc_real_L16": 0.7364089235434265,
+  "auc_null_L16": 0.4247346761966645,
+  "diff_ci95": [
+   0.18279564125101214,
+   0.43665972673966863
+  ],
+  "passed": true
+ },
+ "P5_first_order": {
+  "auc_FO_for_success": 0.8072341347195149,
+  "perm_p": 9.999000099990002e-05,
+  "auc_margin": 0.9564652371669915,
+  "auc_N": 0.247346761966645,
+  "passed": true,
+  "note": "added for the held-out replication (preregistration_heldout_scoring_h1_e1.md); the dev-suite analysis did not compute it"
+ },
+ "E1_supported": false,
+ "exploratory": {
+  "knee_alignment": {
+   "n": 57,
+   "frac_alpha_n_le_alpha_c": 0.6491228070175439,
+   "spearman": 0.09760717815998217
+  },
+  "loo_logistic_auc": null,
+  "success_by_margin_sign": {
+   "margin_positive": 69,
+   "hit": 57
+  },
+  "mean_N_success_vs_fail": [
+   -19.92408988350316,
+   -7.447532783319921
+  ],
+  "mean_FO_success_vs_fail": [
+   22.241876150432386,
+   3.7942577762368286
+  ]
+ },
+ "null_lens_check": {
+  "cos_transported": 0.8251000881195069,
+  "cos_identity": 0.7259475231170655,
+  "lens_matches_weights": true
+ }
+}

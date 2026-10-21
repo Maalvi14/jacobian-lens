@@ -1,0 +1,43 @@
+START Mon Oct 19 11:12:53 PM EST 2026
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:  14%|█▍        | 41/291 [00:00<00:00, 391.35it/s]Loading weights:  29%|██▉       | 85/291 [00:00<00:00, 419.00it/s]Loading weights:  45%|████▍     | 130/291 [00:00<00:00, 431.84it/s]Loading weights:  62%|██████▏   | 179/291 [00:00<00:00, 454.56it/s]Loading weights:  78%|███████▊  | 226/291 [00:00<00:00, 457.83it/s]Loading weights:  93%|█████████▎| 272/291 [00:00<00:00, 443.56it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 447.12it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+L16 kappa J/rand 1.00 neuron/rand 1.00 | g1 J/rand 1.00 neuron/rand 1.00
+results/h2_replication/B3_null_llama3.1-8b_s20_L16.json
+null s20 L16 exit 0 Mon Oct 19 11:36:25 PM EST 2026
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 66/291 [00:00<00:00, 640.48it/s]Loading weights:  47%|████▋     | 138/291 [00:00<00:00, 680.98it/s]Loading weights:  71%|███████   | 207/291 [00:00<00:00, 670.25it/s]Loading weights:  95%|█████████▍| 275/291 [00:00<00:00, 661.06it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 683.69it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+L16 kappa J/rand 1.00 neuron/rand 1.00 | g1 J/rand 1.00 neuron/rand 1.00
+results/h2_replication/B3_null_llama3.1-8b_s21_L16.json
+null s21 L16 exit 0 Mon Oct 19 11:59:54 PM EST 2026
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:  11%|█         | 32/291 [00:00<00:00, 317.68it/s]Loading weights:  36%|███▌      | 104/291 [00:00<00:00, 553.58it/s]Loading weights:  60%|█████▉    | 174/291 [00:00<00:00, 612.94it/s]Loading weights:  84%|████████▎ | 243/291 [00:00<00:00, 637.10it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 624.16it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+L16 kappa J/rand 1.00 neuron/rand 1.00 | g1 J/rand 1.00 neuron/rand 1.00
+results/h2_replication/B3_null_llama3.1-8b_s22_L16.json
+null s22 L16 exit 0 Tue Oct 20 12:23:20 AM EST 2026
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 67/291 [00:00<00:00, 629.05it/s]Loading weights:  47%|████▋     | 136/291 [00:00<00:00, 658.08it/s]Loading weights:  71%|███████   | 207/291 [00:00<00:00, 675.26it/s]Loading weights:  95%|█████████▍| 275/291 [00:00<00:00, 670.06it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 680.57it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+L08 kappa J/rand 1.00 neuron/rand 1.00 | g1 J/rand 1.00 neuron/rand 1.00
+L24 kappa J/rand 1.00 neuron/rand 1.00 | g1 J/rand 1.00 neuron/rand 1.00
+results/h2_replication/B3_null_llama3.1-8b_s20_L8-24.json
+null s20 L8-24 exit 0 Tue Oct 20 12:58:59 AM EST 2026
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 38/291 [00:00<00:00, 370.05it/s]Loading weights:  36%|███▌      | 105/291 [00:00<00:00, 534.21it/s]Loading weights:  61%|██████    | 177/291 [00:00<00:00, 604.09it/s]Loading weights:  87%|████████▋ | 253/291 [00:00<00:00, 649.18it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 635.46it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 4917.12it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+L08 kappa J/rand 1.64 neuron/rand 1.40 | g1 J/rand 0.88 neuron/rand 1.10
+L16 kappa J/rand 1.40 neuron/rand 1.21 | g1 J/rand 0.97 neuron/rand 1.05
+L18 kappa J/rand 1.27 neuron/rand 1.18 | g1 J/rand 0.99 neuron/rand 1.03
+L20 kappa J/rand 1.40 neuron/rand 1.10 | g1 J/rand 0.99 neuron/rand 1.02
+L22 kappa J/rand 1.39 neuron/rand 1.07 | g1 J/rand 0.99 neuron/rand 1.01
+L24 kappa J/rand 1.34 neuron/rand 1.06 | g1 J/rand 0.99 neuron/rand 1.01
+L26 kappa J/rand 1.84 neuron/rand 1.13 | g1 J/rand 1.04 neuron/rand 1.00
+L28 kappa J/rand 2.11 neuron/rand 1.25 | g1 J/rand 1.19 neuron/rand 0.98
+L30 kappa J/rand 2.83 neuron/rand 1.06 | g1 J/rand 2.52 neuron/rand 0.89
+results/h2_replication/B3_real_llama3.1-8b.json
+real exit 0 Tue Oct 20 01:10:41 AM EST 2026
+analyze exit 0 Tue Oct 20 01:10:43 AM EST 2026
+ALL DONE Tue Oct 20 01:10:43 AM EST 2026

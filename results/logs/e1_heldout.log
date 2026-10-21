@@ -1,0 +1,25 @@
+START Sun Oct 18 09:29:45 PM EST 2026
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 5648.89it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<02:03,  3.45it/s]Loading weights:  18%|█▊        | 78/426 [00:00<00:01, 249.67it/s]Loading weights:  28%|██▊       | 120/426 [00:00<00:01, 266.13it/s]Loading weights:  37%|███▋      | 157/426 [00:00<00:00, 273.57it/s]Loading weights:  45%|████▍     | 191/426 [00:00<00:00, 281.85it/s]Loading weights:  53%|█████▎    | 224/426 [00:00<00:00, 288.40it/s]Loading weights:  60%|██████    | 257/426 [00:00<00:00, 296.07it/s]Loading weights:  69%|██████▊   | 292/426 [00:01<00:00, 301.13it/s]Loading weights:  78%|███████▊  | 331/426 [00:01<00:00, 310.11it/s]Loading weights:  85%|████████▌ | 364/426 [00:01<00:00, 311.87it/s]Loading weights:  93%|█████████▎| 397/426 [00:01<00:00, 315.45it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 283.03it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1214.33it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 9697.81it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  21%|██        | 89/426 [00:00<00:00, 847.36it/s]Loading weights:  56%|█████▌    | 237/426 [00:00<00:00, 1194.04it/s]Loading weights:  86%|████████▋ | 368/426 [00:00<00:00, 1243.45it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 1224.41it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  10/126 items, 167s
+  20/126 items, 333s
+  30/126 items, 499s
+  40/126 items, 665s
+  50/126 items, 834s
+  60/126 items, 1000s
+  70/126 items, 1166s
+  80/126 items, 1332s
+  90/126 items, 1498s
+  100/126 items, 1664s
+  110/126 items, 1833s
+  120/126 items, 2000s
+e1 exit 0 Sun Oct 18 10:05:00 PM EST 2026
+analyze exit 0 Sun Oct 18 10:05:06 PM EST 2026
+ALL DONE Sun Oct 18 10:05:06 PM EST 2026

@@ -92,7 +92,7 @@ def restricted_hessian(
     hvp_fn: Callable[..., torch.Tensor] = hvp_fr,
 ) -> RestrictedHessian:
     k = directions.shape[0]
-    H_restricted = torch.zeros(k, k)
+    H_restricted = directions.new_zeros(k, k)  # same device/dtype as the inputs
 
     for j in range(k):
         v_j = directions[j]

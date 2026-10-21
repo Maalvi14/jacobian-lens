@@ -1,0 +1,117 @@
+START Sat Oct 17 07:57:10 PM EST 2026
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 13530.01it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  54%|█████▎    | 228/426 [00:00<00:00, 2275.94it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 2267.33it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1446.31it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+165 single-token items; baseline correct 114; band L12-20
+alpha=1.25: hits 60/114 (53%); random control [0, 0, 0]
+alpha=1.0: hits 38/114 (33%); random control [0, 0, 0]
+{
+ "1.25": {
+  "hits": 60,
+  "n": 114,
+  "rate": 0.5263157894736842,
+  "wilson95": [
+   0.4353020195230544,
+   0.615613786100766
+  ],
+  "random_control_hits": [
+   0,
+   0,
+   0
+  ],
+  "passed": true,
+  "by_category": {
+   "city-capital": "19/32",
+   "city-continent": "11/25",
+   "city-currency": "0/2",
+   "city-language": "22/29",
+   "element-symbol": "4/18",
+   "language-capital": "4/8"
+  }
+ },
+ "1.0": {
+  "hits": 38,
+  "n": 114,
+  "rate": 0.3333333333333333,
+  "wilson95": [
+   0.2534794722358529,
+   0.4240537588132842
+  ],
+  "random_control_hits": [
+   0,
+   0,
+   0
+  ],
+  "passed": true,
+  "by_category": {
+   "city-capital": "9/32",
+   "city-continent": "19/25",
+   "city-currency": "0/2",
+   "city-language": "6/29",
+   "element-symbol": "0/18",
+   "language-capital": "4/8"
+  }
+ }
+}
+qwen exit 0 Sat Oct 17 07:59:02 PM EST 2026
+Loading weights:   0%|          | 0/1065 [00:00<?, ?it/s]Loading weights:  18%|█▊        | 197/1065 [00:00<00:00, 1940.67it/s]Loading weights:  40%|███▉      | 421/1065 [00:00<00:00, 2112.32it/s]Loading weights:  60%|██████    | 641/1065 [00:00<00:00, 2151.01it/s]Loading weights:  85%|████████▌ | 906/1065 [00:00<00:00, 2340.69it/s]Loading weights: 100%|██████████| 1065/1065 [00:00<00:00, 2333.11it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 2755.78it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+165 single-token items; baseline correct 125; band L18-30
+alpha=1.25: hits 4/125 (3%); random control [0, 0, 0]
+alpha=1.0: hits 55/125 (44%); random control [0, 0, 0]
+{
+ "1.25": {
+  "hits": 4,
+  "n": 125,
+  "rate": 0.032,
+  "wilson95": [
+   0.012512936695839402,
+   0.07939526686574319
+  ],
+  "random_control_hits": [
+   0,
+   0,
+   0
+  ],
+  "passed": false,
+  "by_category": {
+   "city-capital": "1/32",
+   "city-continent": "0/25",
+   "city-language": "0/29",
+   "element-state": "0/13",
+   "element-symbol": "1/18",
+   "language-capital": "2/8"
+  }
+ },
+ "1.0": {
+  "hits": 55,
+  "n": 125,
+  "rate": 0.44,
+  "wilson95": [
+   0.3560569897020464,
+   0.5275209851135412
+  ],
+  "random_control_hits": [
+   0,
+   0,
+   0
+  ],
+  "passed": true,
+  "by_category": {
+   "city-capital": "12/32",
+   "city-continent": "19/25",
+   "city-language": "19/29",
+   "element-state": "1/13",
+   "element-symbol": "0/18",
+   "language-capital": "4/8"
+  }
+ }
+}
+gemma exit 0 Sat Oct 17 08:02:36 PM EST 2026
+ALL DONE Sat Oct 17 08:02:36 PM EST 2026

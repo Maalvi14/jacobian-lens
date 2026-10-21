@@ -1,0 +1,436 @@
+START Sun Oct 18 08:53:30 PM EST 2026
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 6379.17it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<02:00,  3.52it/s]Loading weights:  14%|█▍        | 61/426 [00:00<00:01, 202.92it/s]Loading weights:  23%|██▎       | 97/426 [00:00<00:01, 252.79it/s]Loading weights:  31%|███       | 133/426 [00:00<00:01, 264.96it/s]Loading weights:  39%|███▉      | 167/426 [00:00<00:00, 279.65it/s]Loading weights:  47%|████▋     | 200/426 [00:00<00:00, 293.72it/s]Loading weights:  55%|█████▍    | 234/426 [00:00<00:00, 296.94it/s]Loading weights:  62%|██████▏   | 266/426 [00:01<00:00, 291.15it/s]Loading weights:  71%|███████   | 302/426 [00:01<00:00, 310.38it/s]Loading weights:  79%|███████▊  | 335/426 [00:01<00:00, 307.03it/s]Loading weights:  87%|████████▋ | 369/426 [00:01<00:00, 308.41it/s]Loading weights:  96%|█████████▌| 408/426 [00:01<00:00, 320.00it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 277.76it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1313.18it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 9998.34it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<00:43,  9.82it/s]Loading weights:  38%|███▊      | 162/426 [00:00<00:00, 944.13it/s]Loading weights:  71%|███████   | 301/426 [00:00<00:00, 1144.19it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 1083.62it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  10/165 items, 193s
+  20/165 items, 302s
+  30/165 items, 412s
+  40/165 items, 521s
+  50/165 items, 632s
+  60/165 items, 741s
+  70/165 items, 851s
+  80/165 items, 962s
+  90/165 items, 1071s
+  100/165 items, 1180s
+  110/165 items, 1290s
+  120/165 items, 1401s
+  130/165 items, 1516s
+  140/165 items, 1634s
+  150/165 items, 1749s
+  160/165 items, 1866s
+{
+ "hit_a1": {
+  "label": "hit_a1",
+  "n": 126,
+  "n_fail": 87,
+  "n_success": 39,
+  "auc": {
+   "tau_L12": {
+    "auc": 0.301,
+    "ci95": [
+     0.209,
+     0.395
+    ],
+    "perm_p": 1.0
+   },
+   "tau_L16": {
+    "auc": 0.289,
+    "ci95": [
+     0.197,
+     0.393
+    ],
+    "perm_p": 1.0
+   },
+   "tau_L20": {
+    "auc": 0.29,
+    "ci95": [
+     0.2,
+     0.387
+    ],
+    "perm_p": 1.0
+   },
+   "tau_mean": {
+    "auc": 0.287,
+    "ci95": [
+     0.197,
+     0.386
+    ],
+    "perm_p": 1.0
+   },
+   "tau_max": {
+    "auc": 0.289,
+    "ci95": [
+     0.197,
+     0.39
+    ],
+    "perm_p": 1.0
+   },
+   "baseline_neg_loading_L12": {
+    "auc": 0.633,
+    "ci95": [
+     0.525,
+     0.738
+    ],
+    "perm_p": 0.006
+   },
+   "baseline_neg_loading_L16": {
+    "auc": 0.655,
+    "ci95": [
+     0.553,
+     0.754
+    ],
+    "perm_p": 0.001
+   },
+   "baseline_neg_loading_L20": {
+    "auc": 0.589,
+    "ci95": [
+     0.49,
+     0.691
+    ],
+    "perm_p": 0.0515
+   },
+   "baseline_neg_loading_mean": {
+    "auc": 0.636,
+    "ci95": [
+     0.533,
+     0.743
+    ],
+    "perm_p": 0.0065
+   },
+   "baseline_neg_jdelta_mean": {
+    "auc": 0.696,
+    "ci95": [
+     0.603,
+     0.787
+    ],
+    "perm_p": 0.0005
+   },
+   "num_mean": {
+    "auc": 0.29,
+    "ci95": [
+     0.202,
+     0.381
+    ],
+    "perm_p": 1.0
+   },
+   "baseline_delta_norm_mean": {
+    "auc": 0.29,
+    "ci95": [
+     0.204,
+     0.381
+    ],
+    "perm_p": 1.0
+   },
+   "null_tau_L16": {
+    "auc": 0.445,
+    "ci95": [
+     0.337,
+     0.55
+    ],
+    "perm_p": 0.8341
+   },
+   "null_baseline_neg_loading_L16": {
+    "auc": 0.427,
+    "ci95": [
+     0.318,
+     0.537
+    ],
+    "perm_p": 0.9035
+   }
+  },
+  "spearman_tau16_vs_loading16": 0.299,
+  "spearman_tau16_vs_jdelta16": 0.593,
+  "loo_logistic_auc": {
+   "loading16": 0.627,
+   "log_tau16": 0.689,
+   "loading16+log_tau16": 0.691
+  },
+  "stratified_by_geography": {
+   "tau_L16": {
+    "stratified_auc": 0.37,
+    "p_greater": 0.9887,
+    "p_less": 0.012
+   },
+   "tau_mean": {
+    "stratified_auc": 0.367,
+    "p_greater": 0.9907,
+    "p_less": 0.01
+   },
+   "baseline_neg_loading_L16": {
+    "stratified_auc": 0.576,
+    "p_greater": 0.1016,
+    "p_less": 0.9
+   },
+   "baseline_neg_jdelta_mean": {
+    "stratified_auc": 0.625,
+    "p_greater": 0.0147,
+    "p_less": 0.9863
+   },
+   "num_mean": {
+    "stratified_auc": 0.37,
+    "p_greater": 0.9903,
+    "p_less": 0.0103
+   }
+  },
+  "within_group_tau16": {
+   "geography": {
+    "n": 107,
+    "n_fail": 68,
+    "auc_tau16": 0.37
+   },
+   "other": {
+    "n": 19,
+    "n_fail": 19,
+    "auc_tau16": NaN
+   }
+  },
+  "by_category": {
+   "city-capital": {
+    "n": 32,
+    "success": 9,
+    "mean_tau16": 0.975
+   },
+   "city-continent": {
+    "n": 25,
+    "success": 19,
+    "mean_tau16": 0.85
+   },
+   "city-currency": {
+    "n": 13,
+    "success": 1,
+    "mean_tau16": 1.132
+   },
+   "city-language": {
+    "n": 29,
+    "success": 6,
+    "mean_tau16": 0.809
+   },
+   "element-state": {
+    "n": 1,
+    "success": 0,
+    "mean_tau16": 0.164
+   },
+   "element-symbol": {
+    "n": 18,
+    "success": 0,
+    "mean_tau16": 0.217
+   },
+   "language-capital": {
+    "n": 8,
+    "success": 4,
+    "mean_tau16": 1.082
+   }
+  }
+ },
+ "hit_a1.25": {
+  "label": "hit_a1.25",
+  "n": 126,
+  "n_fail": 65,
+  "n_success": 61,
+  "auc": {
+   "tau_L12": {
+    "auc": 0.492,
+    "ci95": [
+     0.393,
+     0.593
+    ],
+    "perm_p": 0.5687
+   },
+   "tau_L16": {
+    "auc": 0.507,
+    "ci95": [
+     0.404,
+     0.609
+    ],
+    "perm_p": 0.4618
+   },
+   "tau_L20": {
+    "auc": 0.495,
+    "ci95": [
+     0.389,
+     0.598
+    ],
+    "perm_p": 0.5607
+   },
+   "tau_mean": {
+    "auc": 0.498,
+    "ci95": [
+     0.397,
+     0.602
+    ],
+    "perm_p": 0.5272
+   },
+   "tau_max": {
+    "auc": 0.51,
+    "ci95": [
+     0.41,
+     0.615
+    ],
+    "perm_p": 0.4438
+   },
+   "baseline_neg_loading_L12": {
+    "auc": 0.556,
+    "ci95": [
+     0.455,
+     0.66
+    ],
+    "perm_p": 0.1374
+   },
+   "baseline_neg_loading_L16": {
+    "auc": 0.563,
+    "ci95": [
+     0.463,
+     0.666
+    ],
+    "perm_p": 0.1069
+   },
+   "baseline_neg_loading_L20": {
+    "auc": 0.546,
+    "ci95": [
+     0.44,
+     0.647
+    ],
+    "perm_p": 0.1889
+   },
+   "baseline_neg_loading_mean": {
+    "auc": 0.557,
+    "ci95": [
+     0.454,
+     0.661
+    ],
+    "perm_p": 0.1309
+   },
+   "baseline_neg_jdelta_mean": {
+    "auc": 0.539,
+    "ci95": [
+     0.434,
+     0.638
+    ],
+    "perm_p": 0.2239
+   },
+   "num_mean": {
+    "auc": 0.464,
+    "ci95": [
+     0.365,
+     0.568
+    ],
+    "perm_p": 0.7656
+   },
+   "baseline_delta_norm_mean": {
+    "auc": 0.627,
+    "ci95": [
+     0.522,
+     0.724
+    ],
+    "perm_p": 0.007
+   },
+   "null_tau_L16": {
+    "auc": 0.538,
+    "ci95": [
+     0.433,
+     0.64
+    ],
+    "perm_p": 0.2364
+   },
+   "null_baseline_neg_loading_L16": {
+    "auc": 0.465,
+    "ci95": [
+     0.362,
+     0.568
+    ],
+    "perm_p": 0.7401
+   }
+  },
+  "spearman_tau16_vs_loading16": 0.299,
+  "spearman_tau16_vs_jdelta16": 0.593,
+  "loo_logistic_auc": {
+   "loading16": 0.512,
+   "log_tau16": 0.388,
+   "loading16+log_tau16": 0.471
+  },
+  "stratified_by_geography": {
+   "tau_L16": {
+    "stratified_auc": 0.614,
+    "p_greater": 0.017,
+    "p_less": 0.9833
+   },
+   "tau_mean": {
+    "stratified_auc": 0.602,
+    "p_greater": 0.0313,
+    "p_less": 0.97
+   },
+   "baseline_neg_loading_L16": {
+    "stratified_auc": 0.489,
+    "p_greater": 0.5851,
+    "p_less": 0.4175
+   },
+   "baseline_neg_jdelta_mean": {
+    "stratified_auc": 0.475,
+    "p_greater": 0.6738,
+    "p_less": 0.3276
+   },
+   "num_mean": {
+    "stratified_auc": 0.55,
+    "p_greater": 0.1943,
+    "p_less": 0.8077
+   }
+  },
+  "within_group_tau16": {
+   "geography": {
+    "n": 107,
+    "n_fail": 50,
+    "auc_tau16": 0.619
+   },
+   "other": {
+    "n": 19,
+    "n_fail": 15,
+    "auc_tau16": 0.367
+   }
+  },
+  "by_category": {
+   "city-capital": {
+    "n": 32,
+    "success": 19,
+    "mean_tau16": 0.975
+   },
+   "city-continent": {
+    "n": 25,
+    "success": 11,
+    "mean_tau16": 0.85
+   },
+   "city-currency": {
+    "n": 13,
+    "success": 1,
+    "mean_tau16": 1.132
+   },
+   "city-language": {
+    "n": 29,
+    "success": 22,
+    "mean_tau16": 0.809
+   },
+   "element-state": {
+    "n": 1,
+    "success": 0,
+    "mean_tau16": 0.164
+   },
+   "element-symbol": {
+    "n": 18,
+    "success": 4,
+    "mean_tau16": 0.217
+   },
+   "language-capital": {
+    "n": 8,
+    "success": 4,
+    "mean_tau16": 1.082
+   }
+  }
+ }
+}
+h1 exit 0 Sun Oct 18 09:25:57 PM EST 2026
+ALL DONE Sun Oct 18 09:25:57 PM EST 2026

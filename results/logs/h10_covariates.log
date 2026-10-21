@@ -1,0 +1,15 @@
+START Mon Oct 19 11:46:22 AM EST 2026
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 7423.55it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<02:04,  3.41it/s]Loading weights:  18%|█▊        | 78/426 [00:00<00:01, 248.92it/s]Loading weights:  28%|██▊       | 121/426 [00:00<00:01, 265.94it/s]Loading weights:  37%|███▋      | 158/426 [00:00<00:00, 279.95it/s]Loading weights:  46%|████▌     | 195/426 [00:00<00:00, 293.40it/s]Loading weights:  54%|█████▍    | 229/426 [00:00<00:00, 293.28it/s]Loading weights:  62%|██████▏   | 262/426 [00:01<00:00, 291.96it/s]Loading weights:  71%|███████   | 301/426 [00:01<00:00, 312.02it/s]Loading weights:  78%|███████▊  | 334/426 [00:01<00:00, 296.80it/s]Loading weights:  86%|████████▌ | 365/426 [00:01<00:00, 295.04it/s]Loading weights:  93%|█████████▎| 398/426 [00:01<00:00, 300.89it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 279.39it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1054.91it/s]
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+persona 100
+synonym 100
+control 100
+countries 66
+compute exit 0 Mon Oct 19 12:00:19 PM EST 2026
+analyze exit 0 Mon Oct 19 12:00:22 PM EST 2026
+ALL DONE Mon Oct 19 12:00:22 PM EST 2026

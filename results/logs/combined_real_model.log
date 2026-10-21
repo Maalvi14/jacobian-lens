@@ -1,0 +1,119 @@
+START Mon Oct 19 05:11:19 PM EST 2026
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-9.0.3, pluggy-1.6.0 -- /home/mv/repos/jacobian-lens/.venv/bin/python
+rootdir: /home/mv/repos/jacobian-lens
+configfile: pyproject.toml
+plugins: anyio-4.13.0
+collecting ... collected 198 items / 153 deselected / 45 selected
+
+tests/test_benchmark.py::test_benchmark_guard_and_timings PASSED         [  2%]
+tests/test_early_averaging.py::test_early_averaging_pipeline_small PASSED [  4%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[2-3] PASSED [  6%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[3-4] PASSED [  8%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[3-12] PASSED [ 11%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[0-30] PASSED [ 13%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[2-3] PASSED [ 15%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[3-4] PASSED [ 17%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[3-12] PASSED [ 20%]
+tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[0-30] PASSED [ 22%]
+tests/test_gain.py::test_mlp_gain_gate PASSED                            [ 24%]
+tests/test_harness.py::test_eps_sweep_plateau_and_estimator_agreement_real PASSED [ 26%]
+tests/test_harness.py::test_ms_hvp_converges_to_exact_secant_real PASSED [ 28%]
+tests/test_harness.py::test_validity_score_flags_oversized_perturbations_real PASSED [ 31%]
+tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[full-attn-layer] PASSED [ 33%]
+tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[linear-attn-layer] PASSED [ 35%]
+tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[mixed] PASSED     [ 37%]
+tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[logit-from-20] PASSED [ 40%]
+tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[full-attn-layer] PASSED [ 42%]
+tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[linear-attn-layer] PASSED [ 44%]
+tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[mixed] PASSED        [ 46%]
+tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[logit-from-20] PASSED [ 48%]
+tests/test_hvp.py::test_hvp_fr_first_call_does_not_poison_kwargs_cache PASSED [ 51%]
+tests/test_hvp.py::test_hvp_norm_form_matches_second_difference_qwen_fp32[2-5] PASSED [ 53%]
+tests/test_hvp.py::test_hvp_norm_form_matches_second_difference_qwen_fp32[3-12] PASSED [ 55%]
+tests/test_hvp.py::test_restricted_hessian_real_qwen_fp32 PASSED         [ 57%]
+tests/test_interpolation.py::test_ignition_share_curves PASSED           [ 60%]
+tests/test_interventions.py::test_multihop_swap_flips_currency PASSED    [ 62%]
+tests/test_interventions.py::test_probe_swap_sweep PASSED                [ 64%]
+tests/test_jspace.py::test_jspace_paper_gate PASSED                      [ 66%]
+tests/test_landmarks.py::test_landmark_curves_and_workspace_range PASSED [ 68%]
+tests/test_null_pipeline.py::test_randomized_model_and_null_lens_fit_timing PASSED [ 71%]
+tests/test_real_gemma.py::test_shapes_and_architecture PASSED            [ 73%]
+tests/test_real_gemma.py::test_lens_reads_out_concepts PASSED            [ 75%]
+tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[2-3] PASSED [ 77%]
+tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[4-6] PASSED [ 80%]
+tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[3-12] PASSED [ 82%]
+tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[0-46] PASSED [ 84%]
+tests/test_real_gemma.py::test_hvp_fr_matches_rr_on_real_slice PASSED    [ 86%]
+tests/test_real_qwen.py::test_shapes PASSED                              [ 88%]
+tests/test_real_qwen.py::test_n1000_lens_matches_layout PASSED           [ 91%]
+tests/test_real_qwen.py::test_boot_prompt_readout PASSED                 [ 93%]
+tests/test_stress.py::test_pathological_stress_test PASSED               [ 95%]
+tests/test_trust_score.py::test_run_trust_score_mechanics_and_alpha_linearity PASSED [ 97%]
+tests/test_trust_score.py::test_score_variants_mechanics PASSED          [100%]
+
+=============================== warnings summary ===============================
+tests/test_benchmark.py::test_benchmark_guard_and_timings
+  /home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+
+tests/test_benchmark.py: 18 warnings
+  /home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+============================== slowest durations ===============================
+557.91s call     tests/test_jspace.py::test_jspace_paper_gate
+333.43s call     tests/test_stress.py::test_pathological_stress_test
+198.57s call     tests/test_interventions.py::test_probe_swap_sweep
+126.78s call     tests/test_null_pipeline.py::test_randomized_model_and_null_lens_fit_timing
+93.75s setup    tests/test_real_gemma.py::test_shapes_and_architecture
+67.56s call     tests/test_early_averaging.py::test_early_averaging_pipeline_small
+64.86s setup    tests/test_landmarks.py::test_landmark_curves_and_workspace_range
+37.78s call     tests/test_gain.py::test_mlp_gain_gate
+25.69s call     tests/test_benchmark.py::test_benchmark_guard_and_timings
+22.41s call     tests/test_harness.py::test_ms_hvp_converges_to_exact_secant_real
+17.04s call     tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[0-46]
+16.78s call     tests/test_trust_score.py::test_run_trust_score_mechanics_and_alpha_linearity
+16.14s setup    tests/test_jspace.py::test_jspace_paper_gate
+10.88s call     tests/test_harness.py::test_eps_sweep_plateau_and_estimator_agreement_real
+7.95s call     tests/test_trust_score.py::test_score_variants_mechanics
+7.14s setup    tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[2-3]
+6.74s setup    tests/test_benchmark.py::test_benchmark_guard_and_timings
+5.16s call     tests/test_hvp.py::test_restricted_hessian_real_qwen_fp32
+4.86s call     tests/test_harness.py::test_validity_score_flags_oversized_perturbations_real
+3.93s call     tests/test_interventions.py::test_multihop_swap_flips_currency
+3.89s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[0-30]
+3.62s call     tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[3-12]
+3.02s call     tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[logit-from-20]
+2.86s call     tests/test_interpolation.py::test_ignition_share_curves
+2.78s call     tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[logit-from-20]
+2.42s call     tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[mixed]
+2.26s call     tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[mixed]
+1.90s call     tests/test_hvp.py::test_hvp_norm_form_matches_second_difference_qwen_fp32[3-12]
+1.79s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[0-30]
+1.64s call     tests/test_real_gemma.py::test_hvp_fr_matches_rr_on_real_slice
+1.32s call     tests/test_real_gemma.py::test_lens_reads_out_concepts
+1.26s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[3-12]
+1.08s call     tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[4-6]
+0.91s call     tests/test_real_qwen.py::test_boot_prompt_readout
+0.72s call     tests/test_real_gemma.py::test_slice_matches_hooked_forward_fp32[2-3]
+0.71s call     tests/test_hvp.py::test_hvp_norm_form_matches_second_difference_qwen_fp32[2-5]
+0.58s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[3-12]
+0.55s call     tests/test_real_qwen.py::test_n1000_lens_matches_layout
+0.41s call     tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[linear-attn-layer]
+0.38s call     tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[linear-attn-layer]
+0.37s call     tests/test_hvp.py::test_hvp_bf16_noise_vs_fp32_qwen[full-attn-layer]
+0.30s call     tests/test_hvp.py::test_hvp_estimators_agree_qwen_fp32[full-attn-layer]
+0.28s call     tests/test_hvp.py::test_hvp_fr_first_call_does_not_poison_kwargs_cache
+0.25s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[3-4]
+0.25s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen_fp32[2-3]
+0.22s teardown tests/test_real_gemma.py::test_hvp_fr_matches_rr_on_real_slice
+0.20s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[2-3]
+0.12s call     tests/test_functional.py::test_slice_fn_matches_hooked_forward_qwen[3-4]
+0.08s teardown tests/test_trust_score.py::test_score_variants_mechanics
+
+(86 durations < 0.005s hidden.  Use -vv to show these durations.)
+========= 45 passed, 153 deselected, 19 warnings in 1663.72s (0:27:43) =========
+pytest exit 0 Mon Oct 19 05:39:07 PM EST 2026
+ALL DONE Mon Oct 19 05:39:07 PM EST 2026

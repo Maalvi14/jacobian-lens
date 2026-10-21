@@ -1,0 +1,166 @@
+{
+ "register": {
+  "a_threshold_fraction": 1.0,
+  "a_pass": true,
+  "b_width_shrinks_fraction": 0.9666666666666667,
+  "b_pass": true,
+  "c_per_layer": {
+   "4": {
+    "frac_center_gt_flank": 0.3,
+    "p": 0.9999354144267503,
+    "median_lambda": 4.256787760133374
+   },
+   "12": {
+    "frac_center_gt_flank": 0.6,
+    "p": 0.027342010866346203,
+    "median_lambda": 1.1222399309314866
+   },
+   "16": {
+    "frac_center_gt_flank": 0.31666666666666665,
+    "p": 0.9939686815315991,
+    "median_lambda": 2.3533299083152364
+   },
+   "20": {
+    "frac_center_gt_flank": 0.5333333333333333,
+    "p": 0.039252834129320374,
+    "median_lambda": 0.9726344786015255
+   },
+   "24": {
+    "frac_center_gt_flank": 0.6,
+    "p": 0.28042931041473657,
+    "median_lambda": 0.4171489298504396
+   }
+  },
+  "c_pass": false,
+  "reproduces_signature": false,
+  "median_width": {
+   "0": 0.7133268200536946,
+   "4": 0.6655268368348833,
+   "8": 0.6487269356648798,
+   "12": 0.6390839295526705,
+   "16": 0.6330063848722274,
+   "20": 0.6015741936087265,
+   "24": 0.5535489465776664
+  },
+  "mannwhitney_D_vs_countries_p": {
+   "4": 1.2092636049395756e-12,
+   "12": 0.009899092283943851,
+   "16": 0.004022668844255729,
+   "20": 2.4221990584796683e-07,
+   "24": 2.4221990584796683e-07
+  }
+ },
+ "persona": {
+  "a_threshold_fraction": 1.0,
+  "a_pass": true,
+  "b_width_shrinks_fraction": 1.0,
+  "b_pass": true,
+  "c_per_layer": {
+   "4": {
+    "frac_center_gt_flank": 0.9666666666666667,
+    "p": 1.6468418476399226e-11,
+    "median_lambda": 13.39981342943207
+   },
+   "12": {
+    "frac_center_gt_flank": 0.38333333333333336,
+    "p": 0.8820343840322904,
+    "median_lambda": 0.8673710066078206
+   },
+   "16": {
+    "frac_center_gt_flank": 0.5833333333333334,
+    "p": 0.016997050105431802,
+    "median_lambda": 2.343731619104756
+   },
+   "20": {
+    "frac_center_gt_flank": 0.9,
+    "p": 6.521073205914742e-11,
+    "median_lambda": 1.6352605340234103
+   },
+   "24": {
+    "frac_center_gt_flank": 0.95,
+    "p": 1.3483273822499947e-11,
+    "median_lambda": 0.5992950331581265
+   }
+  },
+  "c_pass": true,
+  "reproduces_signature": true,
+  "median_width": {
+   "0": 0.6691573655628972,
+   "4": 0.5481616110505323,
+   "8": 0.4590232007957217,
+   "12": 0.43041904944124015,
+   "16": 0.408757955353075,
+   "20": 0.4003602138940272,
+   "24": 0.3178604701151583
+  },
+  "mannwhitney_D_vs_countries_p": {
+   "4": 0.6310698590143116,
+   "12": 0.6031838382408702,
+   "16": 0.575865998161281,
+   "20": 0.0014559441965551305,
+   "24": 0.01679311310320851
+  }
+ },
+ "countries_reference": {
+  "a_threshold_fraction": 1.0,
+  "a_pass": true,
+  "b_width_shrinks_fraction": 1.0,
+  "b_pass": true,
+  "c_per_layer": {
+   "4": {
+    "frac_center_gt_flank": 1.0,
+    "p": 5.960464477539063e-08,
+    "median_lambda": 15.217726128700972
+   },
+   "12": {
+    "frac_center_gt_flank": 0.375,
+    "p": 0.9736796021461487,
+    "median_lambda": 0.9648573660284863
+   },
+   "16": {
+    "frac_center_gt_flank": 0.5833333333333334,
+    "p": 0.0844048261642456,
+    "median_lambda": 2.8920638866144945
+   },
+   "20": {
+    "frac_center_gt_flank": 0.9166666666666666,
+    "p": 8.344650268554688e-07,
+    "median_lambda": 2.298138112671185
+   },
+   "24": {
+    "frac_center_gt_flank": 1.0,
+    "p": 5.960464477539063e-08,
+    "median_lambda": 0.4056000835613931
+   }
+  },
+  "c_pass": true,
+  "reproduces_signature": true,
+  "median_width": {
+   "0": 0.7051360152446847,
+   "4": 0.672306949308218,
+   "8": 0.5573098678635493,
+   "12": 0.5129971827162843,
+   "16": 0.4889393888322566,
+   "20": 0.45572049964306766,
+   "24": 0.36816999374433945
+  }
+ },
+ "H10_proxy_supported": false,
+ "contrast": {
+  "20": {
+   "p_persona_gt_register": 5.082702381769733e-10,
+   "median_D_persona": 0.5517813321053167,
+   "median_D_register": 0.011368667840011337
+  },
+  "24": {
+   "p_persona_gt_register": 2.0054422332446946e-15,
+   "median_D_persona": 0.16217163215534453,
+   "median_D_register": 0.006719129384020639
+  }
+ },
+ "dissociation_replicates": true,
+ "prereg_sha256": {
+  "recorded": "bcd2232235c4e1f9d61a252a52e96fa59a236531d45a80863deb2163700d1b57",
+  "current": "bcd2232235c4e1f9d61a252a52e96fa59a236531d45a80863deb2163700d1b57"
+ }
+}

@@ -1,0 +1,69 @@
+START Sun Oct 18 02:24:17 AM EST 2026
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 9868.95it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:  31%|███       | 131/426 [00:00<00:00, 1309.49it/s]Loading weights:  62%|██████▏   | 262/426 [00:00<00:00, 1274.22it/s]Loading weights:  93%|█████████▎| 396/426 [00:00<00:00, 1298.91it/s]Loading weights: 100%|██████████| 426/426 [00:00<00:00, 1304.13it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 4928.68it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  control: 1 trials, 29s
+  control: 2 trials, 57s
+  control: 3 trials, 85s
+  control: 4 trials, 114s
+  control: 5 trials, 142s
+  control: 6 trials, 170s
+  control: 7 trials, 198s
+  control: 8 trials, 227s
+  control: 9 trials, 255s
+  control: 10 trials, 283s
+  control: 11 trials, 313s
+  control: 12 trials, 343s
+  control: 13 trials, 373s
+  control: 14 trials, 403s
+  control: 15 trials, 433s
+  control: 16 trials, 462s
+  control: 17 trials, 492s
+  control: 18 trials, 522s
+  control: 19 trials, 552s
+  control: 20 trials, 582s
+  control: 21 trials, 609s
+  control: 22 trials, 635s
+  control: 23 trials, 662s
+  control: 24 trials, 689s
+  control: 25 trials, 715s
+  control: 26 trials, 742s
+  control: 27 trials, 768s
+  control: 28 trials, 795s
+  control: 29 trials, 822s
+  control: 30 trials, 849s
+  control: 31 trials, 877s
+  control: 32 trials, 905s
+  control: 33 trials, 934s
+  control: 34 trials, 962s
+  control: 35 trials, 990s
+  control: 36 trials, 1018s
+  control: 37 trials, 1047s
+  control: 38 trials, 1075s
+  control: 39 trials, 1103s
+  control: 40 trials, 1131s
+  control: 41 trials, 1160s
+  control: 42 trials, 1189s
+  control: 43 trials, 1217s
+  control: 44 trials, 1246s
+  control: 45 trials, 1275s
+  control: 46 trials, 1304s
+  control: 47 trials, 1332s
+  control: 48 trials, 1361s
+  control: 49 trials, 1390s
+  control: 50 trials, 1418s
+  control: 51 trials, 1447s
+  control: 52 trials, 1475s
+  control: 53 trials, 1503s
+  control: 54 trials, 1531s
+  control: 55 trials, 1560s
+  control: 56 trials, 1588s
+  control: 57 trials, 1616s
+  control: 58 trials, 1645s
+  control: 59 trials, 1673s
+  control: 60 trials, 1701s
+run exit 0 Sun Oct 18 02:52:47 AM EST 2026
+analyze exit 0 Sun Oct 18 02:52:49 AM EST 2026
+ALL DONE Sun Oct 18 02:52:49 AM EST 2026

@@ -1,0 +1,265 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{mathptmx}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[font=small,labelfont=bf,labelsep=colon,skip=3pt]{caption}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\setlist{itemsep=1pt,topsep=2pt,parsep=0pt,leftmargin=1.5em}
+\setlength{\parskip}{2.5pt}
+\setlength{\parindent}{0pt}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{1pt}
+\renewcommand{\topfraction}{0.95}
+\renewcommand{\bottomfraction}{0.9}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.75}
+\newcommand{\Hess}{\mathbf{H}}
+\newcommand{\jl}{J_\ell}
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\secref}[1]{\S\ref{#1}}
+\title{\vspace{-1.2em}What Curvature Adds to the Jacobian Lens:\\Pre-registered Second-Order Tests of the Verbalizable Workspace\\ in Three Language Models}
+\author{Author Name\thanks{Replace with author names, affiliations and contact before submission.}}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.2em}
+\begin{abstract}
+\small
+The Jacobian lens (J-lens) reads what a language model is poised to say from an activation, using one first-order map per layer; the interventions built on it (concept swaps, steering, ablation) are linear in the activation. Many phenomena it is used to study are nonlinear, which raises a concrete question: what does second-order structure add? We build an ``H-lens'' toolkit around Hessian-vector products through layer slices, restricted Hessians over J-lens directions, a trust score for the perturbations actually applied, and a reliability harness (estimator agreement, Taylor-validity checks, weight-randomized controls), and we use it to test ten pre-registered hypotheses on Qwen3.5-4B, Gemma~3~12B and Llama~3.1~8B (Qwen3.6-27B for one claim).
+We find one robust positive result: the curvature of the MLP branch along J-lens directions exceeds its curvature along random directions in the upper layers of all three models (ratios up to 2.2, 13.0 and 2.8 at the last measured layer), whereas weight-randomized models show none (20 control arms within 0.6\% of 1).
+For interventions, the first-order lens is sufficient in every intervention test we ran: swap success is ranked by the first-order extrapolation of the answer margin (AUC 0.65 on Qwen, 0.81 on Gemma) and not by the nonlinear gain (0.51, 0.25), and the second-order trust score tracks the size of the first-order push rather than flagging failures.
+A second-order mutual-inhibition effect at the ignition threshold holds on Qwen3.5-4B but fails on Gemma~3~12B and Qwen3.6-27B. Binding, remainder coupling, early-layer content, motor-regime collapse, load-dependent competition and a persona-specific signature are not supported.
+Every confirmatory test was fixed in a hash-recorded pre-registration, and several first-pass conclusions (a persona/register dissociation, a trust-score signal) did not survive scaling or held-out items.
+\end{abstract}
+
+\section{Introduction}
+Interpretability tools built on gradients treat a network as locally linear. The Jacobian lens (J-lens) is a clean example~\citep{gurnee2026workspace}: for each layer $\ell$ it averages the input--output Jacobian of the final residual stream over a corpus of contexts and positions, and reads an activation $h_\ell$ as $\mathrm{lens}(h_\ell)=\mathrm{softmax}(W_U\,\mathrm{norm}(\jl h_\ell))$. The rows of $W_U\jl$ are the \emph{J-lens vectors}, one per vocabulary token. Reading is linear in $h_\ell$, and so is every operation the lens supports: steering along a lens vector, ablating it, or swapping two concepts in lens coordinates, $h\leftarrow h+V(\sigma(c)-c)$ with $c=V^{+}h$.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_overview.pdf}
+\caption{\textbf{Summary.} (a) Answer-margin paths along a concept swap on Gemma~3~12B (median and interquartile range over the 57 items whose answer flips at $\alpha=1.0$ and the 81 that do not). The first-order extrapolation (dashed) ranks the items; the actual margin is flat, crosses zero near $\alpha\approx1$, and rises sharply only beyond the working range ($\alpha>1.3$, shaded). (b) Outcome of each pre-registered test by model: supported (\checkmark), weak ($\sim$), not supported ($\times$), not tested ($-$).}
+\label{fig:overview}
+\end{figure}
+
+\subsection{Motivation: a first-order tool for nonlinear questions}
+The linear construction is the lens's strength (it is cheap, context-independent and grounded in the model's own derivatives) and also its blind spot. The questions the original work leaves open are largely nonlinear: what the sharp ``ignition'' of a concept is mechanistically, why the workspace holds only tens of concepts, whether the broad broadcast of lens directions through the weights reflects alignment or nonlinear amplification, whether early layers are empty or merely linearly inaccessible, and how concepts are bound rather than merely present. In the attribution literature the same tension is documented: AtP* catalogues the failure modes of first-order attribution patching~\citep{kramar2024atp}, and a recent analysis attributes its dominant error to nonlinearities downstream of the patched site and corrects it with one Hessian-vector product~\citep{zhang2026lies}. If intervention results on the J-lens inherit that limit, some of what looks like workspace structure could be linearization error, and some real structure could be invisible to the lens.
+
+\subsection{The H-lens: adding the next Taylor term}
+We ask whether second-order structure adds explanatory power to the J-lens, and build the machinery to answer it. For a map $f$ (a slice of layers, or a layer-to-logit map) we never materialize the Hessian; we fix a contraction and compute Hessian-vector products (HVPs)~\citep{pearlmutter1994fast}. We use three quantities: (i) the \emph{restricted Hessian} $H_{ij}=v_i^\top \Hess v_j$ over a few J-lens directions, whose off-diagonal terms measure interaction between concepts; (ii) the \emph{trust score} $\tau=\|\tfrac12\delta^\top\Hess\delta\|/\|J\delta\|$ for the perturbation $\delta$ actually applied, the ratio of the second- to the first-order change; and (iii) the curvature $\kappa(v)=\|\tfrac12 v^\top\Hess v\|$ of the MLP branch along a unit direction. None of these is reported without a validity gate and a weight-randomized control (\secref{sec:methods}).
+
+\subsection{What we find}
+We pre-registered twelve hypotheses (H1--H11 and a follow-up, E1); ten could be run (two need training checkpoints we do not have). We ran them on three architectures: a hybrid linear/full-attention model (Qwen3.5-4B), a model with sliding and global attention (Gemma~3~12B), and a dense decoder (Llama~3.1~8B); Qwen3.6-27B was used for one claim. \figref{fig:overview} summarizes the outcomes. In brief:
+\begin{itemize}
+\item \textbf{Curvature along lens directions is real (\secref{sec:bprime}).} In the upper layers, $\kappa$ along J-lens directions exceeds $\kappa$ along random directions on all three models, and weight-randomized controls show no effect.
+\item \textbf{The first-order lens suffices for interventions (\secref{sec:suffice}).} Concept swaps are causal and control-separated on both models tested, with a model-dependent best strength. Which swaps succeed is ranked by the first-order extrapolation of the answer margin, not by the nonlinear gain, and $\tau$ marks the size of the first-order push, not failure.
+\item \textbf{One second-order effect is model-specific (\secref{sec:claima}).} Near the ignition threshold, raising one concept lowers the sensitivity of a competing one (negative second-order cross-terms against positive first-order cross-effects) on Qwen3.5-4B only.
+\item \textbf{Most second-order hypotheses fail (\secref{sec:negatives}).} Binding, remainder coupling, early-layer content, motor-regime collapse, load-dependent competition and a persona-specific signature are not supported; the ignition-as-curvature hypothesis is weak on Qwen and absent on Gemma.
+\end{itemize}
+
+\subsection{Takeaways}
+Second-order structure is present and aligned with the lens's directions, but for the interventions we could test it is not where the explanatory power is: the first-order extrapolation of the intervention's effect ranked swap outcomes and the nonlinear gain did not. The practical implication for lens users is reassuring: swap outcomes are predicted by first-order quantities of the intervention itself. For the second-order program, the implication is a bounded one: most hypotheses that attribute a mechanism to curvature fail under controls, and the exceptions (curvature along lens directions; one inhibition effect) describe structure rather than demonstrate use.
+
+\section{Methods}
+\label{sec:methods}
+\subsection{The Jacobian lens and concept swaps}
+We use the corpus-averaged Jacobian $\jl=\mathbb{E}_{t,t'\ge t,\mathrm{prompt}}[\partial h_{\mathrm{final},t'}/\partial h_{\ell,t}]$ and its readout as defined in \citet{gurnee2026workspace}, with the pre-fitted lenses distributed through Neuronpedia~\citep{lin2023neuronpedia}. It generalizes the logit lens ($\jl=I$)~\citep{nostalgebraist2020logit} by correcting for representational change across layers, and differs from the tuned lens~\citep{belrose2023tuned} in being a causal average rather than a trained predictor. A \emph{swap} exchanges two concepts in lens coordinates: with $V=[v_s\;v_t]$ the raw lens vectors, $c=V^{+}h$ and $\sigma$ the exchange, $h\leftarrow h+\alpha V(\sigma(c)-c)$, applied at every position over a band of layers with one editor per layer, since each layer has its own $\jl$. Success means the greedy next token equals the swapped answer. The J-space component of an activation is found by sparse non-negative decomposition over the lens vectors (non-negative matching pursuit, a gradient-pursuit variant~\citep{mallat1993matching,blumensath2008gradient}); we use it in the sparse-atom tests (H5) and a reproduction check.
+
+\subsection{Second-order objects}
+Let $f$ map the layer-$\ell$ residual to a scalar or vector. We compute HVPs with three estimators: reverse-over-reverse (reference), forward-over-reverse (production, no double graph~\citep{baydin2018automatic}) and central finite differences (validation only). The restricted Hessian over directions $\{v_i\}$ costs $k$ HVPs. For the trust score the Hessian enters as one Jacobian-vector product of a Jacobian-vector product, with no contraction choice; the perturbation $\delta$ is the swap delta itself, since a score evaluated on perturbations nobody applies says nothing about the interventions' reliability. We read $\tau$ at several layers $\ell$, with $f$ the final-layer residual at the answer position.
+Three measurements recur. \emph{Curvature ratio:} $\kappa$ of the MLP branch (its own norms included) at layer $\ell{+}1$ for unit directions drawn from three populations: lens vectors of tokens actually active on text, MLP-neuron output directions, and isotropic random directions; the ratio is the median over lens directions divided by the median over random directions, per layer. \emph{Ignition protocol:} the embedding at a slot is interpolated, $(1-\alpha)e_B+\alpha e_A$, between two country words; the threshold $\alpha^*$ is where the projection share at a mid layer crosses $0.5$. \emph{Inhibition:} at $\alpha^*$ and $\alpha^*\pm0.2$ we form the restricted Hessian of two readouts (unit lens vectors of the two countries at a target layer) over the two concepts' lens directions at a source layer; with cross-terms $c_A,c_B$, inhibition is $I=-(c_A+c_B)/2$.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_schematic.pdf}
+\caption{\textbf{The H-lens objects.} (a) For a perturbation $\delta$ of the layer-$\ell$ residual, the J-lens sees the first-order change $J\delta$ of a downstream readout; the H-lens adds the second-order term $\tfrac12\delta^\top \mathrm{H}\delta$ of the layer slice, and the trust score $\tau$ is their ratio, evaluated on the perturbations interventions actually apply. (b) The restricted Hessian over a few lens directions (here two concepts and the non-J-space remainder): off-diagonal entries measure interaction. (c) Every curvature measurement is repeated on a weight-randomized copy with a lens re-fitted on it.}
+\label{fig:schematic}
+\end{figure}
+
+\subsection{Reliability harness and controls}
+Every curvature number passes four gates. (i) \emph{Estimator agreement:} the three HVP estimators agree on analytic quadratics, a small MLP against exact Hessians, and on real slices in fp32 (relative difference $1.2\times10^{-6}$ on Llama, $5.5\times10^{-7}$ on Gemma, $\sim10^{-6}$ on Qwen). (ii) \emph{Exact slices:} the pure layer-slice function reproduces the hooked forward pass to zero difference on every model; this required per-block capture of rotary embeddings and masks, because hybrid and sliding-window architectures differ by block. (iii) \emph{Taylor validity:} a finite-difference plateau gives a Taylor radius, and a validity score below one flags that the quadratic picture has broken down at the step size used; Lanczos eigenvalue estimates are checked against longer runs. (iv) \emph{Weight-randomized null:} we re-initialize the model with the library's own initialization, round to bf16 precision, \emph{re-fit a lens on the randomized weights}, and run the identical pipeline. The pre-fitted lens is meaningless on random weights, so a faithful null repeats the whole procedure~\citep{adebayo2018sanity}. For claims of no effect we use an equivalence test~\citep{lakens2017equivalence}: the whole 95\% interval of the null ratio must lie in $[0.95,1.05]$.
+
+\subsection{Models, precision and depth matching}
+\begin{table}[!t]
+\centering\small
+\begin{tabular}{lllll}
+\toprule
+Model & Layers / $d$ & Attention & Lens fit & Used for \\
+\midrule
+Qwen3.5-4B~\citep{qwen2026models} & 32 / 2560 & 3:1 Gated DeltaNet~\citep{yang2025gated} : full & 417 prompts & all tests \\
+Gemma 3 12B~\citep{gemmateam2025gemma3} & 48 / 3840 & sliding : global & 775 prompts & most tests \\
+Llama 3.1 8B~\citep{llamateam2024llama3} & 32 / 4096 & dense, GQA & 539 prompts & curvature ratio \\
+Qwen3.6-27B~\citep{qwen2026models} & 64 / 5120 & 3:1 hybrid & 1000 prompts & inhibition (mixed prec.) \\
+\bottomrule
+\end{tabular}
+\caption{Models. Lenses are the pre-fitted Neuronpedia files (bf16 fits). All curvature work is fp32 with eager attention, since fused kernels lack forward-mode autodiff.}
+\label{tab:models}
+\end{table}
+All curvature results use fp32 weights; bf16 rounding swamps second differences. The 27B model does not fit in fp32 ($\approx108$\,GB), so it is held in bf16 with fp32 copies of only the HVP slice, the final norm and the output head~\citep{micikevicius2018mixed}; this path reproduced the fp32 inhibition result on Qwen3.5-4B (sign agreement 98.6\%/100\%, Spearman 0.999 over 72 cells, median relative error 0.34\%) but was validated for that measurement only. Absolute layer numbers do not transfer between architectures, so every layer is mapped by depth fraction, $\ell/(L{-}1)$, to its counterpart on the reference model; we report depth explicitly. Text contexts are WikiText prompts~\citep{merity2017pointer}.
+
+\subsection{Pre-registration and statistics}
+Each hypothesis has a file fixing setup, tests and decision rule before data; result files store its SHA-256, and a real arm refuses to run before the randomized arm under the same hash~\citep{nosek2018preregistration}. Deviations are dated addenda. The registrations are internal (same team, hash-recorded files, not an external registry). Tests: AUC with bootstrap intervals~\citep{efron1979bootstrap}; one- and two-sided permutation, Wilcoxon signed-rank~\citep{wilcoxon1945individual} and Mann--Whitney~\citep{mann1947test} tests; Spearman correlation~\citep{spearman1904proof}; Wilson intervals~\citep{wilson1927probable}; stratified tests (geography relations versus others, defined after the first analysis); prompt- and pair-level cluster bootstraps; Bonferroni correction for multi-configuration scans. Where trials share items we analyse at the item or pair level.
+
+\section{Results}
+Table~\ref{tab:hyp} lists the hypotheses and the quantity that tests each. We first reproduced the original work's first-order checks on the open models (Appendix~\ref{app:gates}); the main departures are that the context-free MLP-gain gate was not reproduced on Qwen3.5-4B and that the swap rate depends strongly on strength $\alpha$ and model.
+
+\begin{table}[!t]
+\centering\footnotesize
+\begin{tabular}{@{}p{0.9cm}p{5.6cm}p{4.3cm}p{3.7cm}@{}}
+\toprule
+ & Hypothesis & Test quantity & Outcome \\
+\midrule
+B$'$ (H2) & Curvature along lens directions exceeds random & $\kappa$ ratio; equivalence-tested null & holds on 3 models \\
+A (H9) & Competing concepts inhibit each other at the ignition threshold & inhibition $I$; cross-terms & Qwen3.5-4B only \\
+H1 & The trust score $\tau$ flags swap failure & AUC of $\tau$ & no ($\tau$ marks success) \\
+E1 & Nonlinear gain explains swap success & AUC of $N$ versus $FO$ & no; $FO$ ranks success \\
+H6 & Ignition is a curvature event & Lanczos $\lambda$ along the path & weak (Qwen), no (Gemma) \\
+H8 & Curvature collapses near the output & per-block nonlinearity & no \\
+H3, H5 & Binding in cross-terms; remainder coupled to atoms & $|H_{ij}|$ rank; remainder cross-terms & no \\
+H7, H9b & Curvature carries early-layer content; competition grows with load & probe; inhibition vs load & no \\
+H10 & Persona-specific ignition signature & pair-level effect, matched control & no \\
+H4, H11 & Automatization; reflection training & needs checkpoints & not run \\
+\bottomrule
+\end{tabular}
+\caption{Hypotheses, the quantity that tests each, and the outcome (details in the sections that follow).}
+\label{tab:hyp}
+\end{table}
+
+\subsection{Curvature along lens directions exceeds random directions}
+\label{sec:bprime}
+Our first formulation (B) asked whether $\kappa$ along lens directions is above random with a null interval containing 1; it failed its own rules, because bootstrap intervals about $\pm0.0005$ wide around ratios of 0.997--1.002 exclude exactly 1 (Appendix~\ref{app:b}). We replaced the null rule by the equivalence margin $\delta=0.05$ and re-pre-registered on fresh prompts and seeds (B$'$).
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_bprime.pdf}
+\caption{\textbf{Curvature along J-lens directions exceeds random directions in the upper layers, and weight-randomized models show none.} (a--c) Median ratio of $\kappa$ along lens directions to $\kappa$ along random directions, per layer (orange/blue/green with 95\% prompt-cluster intervals), against MLP-neuron output directions (gray) and against the same pipeline on weight-randomized models with a re-fitted lens (open circles, one per seed and layer; shaded gray: equivalence band $[0.95,1.05]$). The shaded yellow region is the depth range $\ge0.5$ used for the test. (d) The first-order gain ratio $\|Jv\|$ for the three models: on Qwen and Llama curvature is raised while first-order gain is not (until the final layers); on Gemma both are raised.}
+\label{fig:bprime}
+\end{figure}
+
+B$'$ holds on all three models (\figref{fig:bprime}). Every null arm lies inside $[0.95,1.05]$ (5, 2 and 5 arms on Qwen3.5-4B, Gemma~3~12B and Llama~3.1~8B; 0.9994--1.0032), the real lower bound exceeds 1.05 at every measured layer at depth $\ge0.5$ (8/8, 6/6 and 8/8), and at the matched null layers it exceeds every null arm's upper bound. The median ratios over that range are 1.33 on Qwen (rising from 1.15 at L16 to 2.20 at L30), 9.4 on Gemma (4.1 at L24 to 13.0 at L44) and 1.40 on Llama (1.40 at L16 to 2.83 at L30), so only Gemma qualifies as a ``large'' effect by our pre-registered 1.5 label. MLP-neuron output directions are mildly elevated on Qwen and Llama (1.06--1.55) and the lens ratio exceeds them at 6 of 8 layers on Qwen, all 8 on Llama and all 6 on Gemma. The first-order gain ratio (\figref{fig:bprime}d) is near 1 up to the last layers on Qwen and Llama but rises early on Gemma, so curvature and gain dissociate on two models and not on the third.
+\textbf{What this says:} the lens directions are preferred directions of MLP-branch curvature in trained networks and not in randomized ones. \textbf{What it does not say:} that the model uses that curvature. We designed B$'$ after seeing B's data; the pre-registered margin, fresh prompts and new seeds are what make it a test.
+
+\subsection{The first-order lens suffices for concept swaps}
+\label{sec:suffice}
+\textbf{Swaps are causal on both models, at model-dependent strengths.} On the original 87-item suite, the swap flipped 35\% of baseline-correct items on Qwen3.5-4B (the original work reports 54--70\% on Claude models) against 0/52 for random-direction swaps; the band and $\alpha$ had been tuned on those items. We therefore generated a held-out suite of 165 two-hop items from fact tables (city $\to$ country $\to$ capital, language, continent or currency; element $\to$ symbol or state; language $\to$ country $\to$ capital) with single-token entities in both tokenizers, disjoint from the original, and fixed the protocol in advance. Qwen's rate held up (61/125 = 48.8\% at the tuned $\alpha=1.25$, controls 0/0/0). On Gemma~3~12B the pre-registered $\alpha=1.25$ failed (5/138 = 3.6\%) while $\alpha=1.0$, found post hoc on the first suite, reached 55/138 = 39.9\% out of sample (\figref{fig:swap}).
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_swap.pdf}
+\caption{\textbf{Concept swaps on a held-out suite.} (a) Fraction of baseline-correct items whose answer flips to the swapped answer, with Wilson 95\% intervals and counts; random-direction controls flip 0 items in all four settings. The faint bars are the non-working strengths; the dotted line is the pre-registered pass threshold (25\%). (b) The same by relation at each model's working strength.}
+\label{fig:swap}
+\end{figure}
+
+\textbf{The nonlinear gain does not explain success; the first-order extrapolation ranks it.} For each baseline-correct item we measure the answer margin $m(\alpha)=\mathrm{logit}(\text{swap})-\mathrm{logit}(\text{answer})$ along the swap path ($\alpha$ from $-0.05$ to $2.0$), the first-order extrapolation $FO(\alpha)=m(0)+\alpha\,m'(0)$ from a central difference, and the nonlinear gain $N=m(\alpha_{\mathrm{ref}})-FO(\alpha_{\mathrm{ref}})$ at the working strength. If nonlinear amplification carried success, $N$ would predict it and most flips would be invisible to the first-order prediction (E1). Neither holds (\figref{fig:e1}a,b): $N$ has AUC 0.39, 0.51 and 0.25 for success on Qwen (dev), Qwen (held-out) and Gemma, and only 2 of 18, 5 of 61 and 2 of 57 successes would not have flipped under $FO$. Successes saturate \emph{below} their first-order extrapolation (mean $N=-20$ vs $-7$ on Gemma) yet have the larger first-order shift (22 vs 4). The first-order prediction ranks success (AUC 0.75, 0.65, 0.81) and the realised margin does better still (0.85, 0.81, 0.96). The margin paths are strongly nonlinear in $\alpha$ (\figref{fig:overview}a); what the first-order lens provides is the ranking of which swaps cross threshold, not the margin's magnitude.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_e1.pdf}
+\caption{\textbf{What predicts swap outcomes.} (a) AUC for swap success of the nonlinear gain $N$, the first-order prediction $FO$ and the realised margin on three item sets (dev suite, held-out suite on Qwen3.5-4B, held-out suite on Gemma~3~12B). (b) Actual margin against first-order extrapolation at the working strength on Gemma: points lie well below the diagonal (saturation) and flips have the larger $FO$. (c) AUC for swap \emph{failure} of the trust score $\tau$ (mid layer), workspace loading and the first-order size $\|J\delta\|$: $\tau$ falls below 0.5, i.e. it marks success, on both models.}
+\label{fig:e1}
+\end{figure}
+
+\textbf{The trust score tracks the size of the first-order push.} The notes behind this program predicted that high $\tau$ marks swap failure (H1). It does not: $\tau$ is a faithful linearization-error score ($\rho=0.95$ with the true first-order error) but its AUC for failure is 0.22 on the dev suite and 0.29 (Qwen) and 0.26 (Gemma) on held-out items at the working strength, with stratified $p=0.012$ and $0.007$ for the reversal; first-order size $\|J\delta\|$ predicts failure at AUC 0.70 and 0.65 (\figref{fig:e1}c). Correlations of $\tau$ with $\|J\delta\|$ are 0.59 and 0.44. At the stronger $\alpha=1.25$ on Qwen the association vanishes (AUC 0.51), consistent with $\tau$ being mostly an effect-size proxy.
+
+\subsection{A model-specific second-order effect near ignition}
+\label{sec:claima}
+At the point where an interpolated embedding flips the model's answer between two countries, we asked whether the two concepts inhibit each other at second order (the original work finds some competition but not whether it is sharp). On Qwen3.5-4B the answer is yes: both cross-terms are negative in 24/24 original trials and in 88\% of 120 held-out trials; inhibition at the threshold exceeds zero, exceeds its value at $\alpha^*\pm0.2$ and exceeds a random orthogonal pair (all three tests pass, $p<2\times10^{-7}$ on the original set and $<10^{-8}$ on the held-out set), while the first-order cross-effect is positive ($+0.27$ to $+0.33$), so the J-lens cannot see it. The effect does not transfer (\figref{fig:claima}a): on Gemma~3~12B only 29--30\% of trials have both terms negative and inhibition does not peak at the threshold; on Qwen3.6-27B (the same family, mixed precision) 8--17\% do and all three tests fail. An exploratory scan of 18 layer-pair and direction-source configurations per model (\figref{fig:claima}c,d) finds the effect on Qwen3.5-4B in 14 of 18 configurations with Bonferroni correction (it needs a target layer well below the output, and works with identity directions, so not only with the J-lens) and in none on Gemma. We therefore state claim A as a finding on Qwen3.5-4B, not about lenses, a model family or language models in general.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_claim_a.pdf}
+\caption{\textbf{Second-order inhibition at the ignition threshold is specific to Qwen3.5-4B.} (a) Fraction of trials with both cross-terms negative at the threshold on the original (O, 24 trials) and held-out (HO, 120) sets; hatched bars: the pre-registered tests fail. (b) Median inhibition at the threshold and $\pm0.2$ on the held-out set, normalized by the flank mean; only Qwen3.5-4B peaks at the threshold. (c,d) Exploratory scan on 24 trials of source layer $\times$ layers-to-target configurations (J-lens directions): both-negative fraction; $*$ marks configurations that pass all three tests with Bonferroni correction.}
+\label{fig:claima}
+\end{figure}
+
+\subsection{What curvature does not explain}
+\label{sec:negatives}
+\textbf{No motor-regime collapse.} If the late rise in lens dimensionality means $\jl\to I$, curvature in that band should collapse (H8). $\jl\to I$ holds on Qwen (distance to a scaled identity 0.996 at L0 to 0.46 at L30) and weakly on Gemma (1.00 to 0.83), but per-block nonlinearity \emph{rises} toward the output on both (motor/workspace ratio 3.73 and 5.05, intervals $[3.5,4.0]$ and $[4.7,5.6]$; the randomized models also rise, 2.06 and 2.33; \figref{fig:structure}a,b).
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_structure.pdf}
+\caption{\textbf{Nonlinearity rises toward the output; ignition curvature is not a general feature.} (a) Per-block nonlinearity of the layer-to-output map (random 10\% perturbations; trained: solid, weight-randomized: dashed). (b) Distance of the lens matrix $\jl$ to its best scalar multiple of the identity. (c) Leading Hessian eigenvalue of the commitment map at the ignition threshold, per layer (median over 24 trials).}
+\label{fig:structure}
+\end{figure}
+
+\textbf{Ignition as a curvature event is weak on Qwen and absent on Gemma (H6).} On Qwen the three pre-registered tests pass, but support rests on three layers (L4, L20, L24; L4 carries 78\% of the pooled statistic), layers L10--L16 show none, and at the threshold the Taylor radius has already collapsed at L16--L24 (0\% of cells valid). A Lanczos check over 320 cells shows the eigenvalues are converged (median relative error 0.01\%, decision statistic stable in 100\%), and scaling by the residual norm shrinks the L4 lead from $5.4\times$ to $1.6\times$. On Gemma the leading eigenvalue falls monotonically with depth and the tests fail (flank difference $p=0.90$; \figref{fig:structure}c).
+
+\textbf{Binding, the remainder, early layers and load.} Hessian cross-terms of binding pairs are not special (H3: rank-fraction 0.496, $p=0.55$, 35 items; the Taylor-2 prediction of measured ablation interactions is within 50\% for 93\% of pairs). Selected sparse atoms couple slightly \emph{less} to the non-J-space remainder's curvature than best-correlated unselected atoms (H5, two forms), and a post-hoc ``orthogonality bias'' account we proposed was refuted by its own follow-up. Where the first-order lens is blind (L4), second-order curvature carries no significant content (H7: $T=0.55$, $p=0.19$; the first-order lens already reads content at L8). Inhibition does not grow with list length (H9, part 2: Spearman $-0.51$; a post-hoc, under-powered occupancy measure).
+
+\textbf{A persona effect did not survive scaling.} Applying the ignition protocol to persona and register word pairs (H10), a 4-pair run suggested that persona pairs show the signature and register pairs do not, a 10-pair run replicated this, and a distance-matched object-noun control showed that unrelated objects do too. At 100 pairs per family (persona, near-synonym, matched control; plus all 66 country pairs; 732 trials; pair-level tests), \emph{all four families} show the signature, with different strengths (\figref{fig:h10}): persona is not larger than its matched control (median pair difference $-0.043$, $p=0.08$; regression coefficient $-0.09$, 95\% CI $[-0.18,-0.006]$). Endpoint distance explains variation within families (Spearman $\approx0.3$) but not between them (overall 0.19); pair-level slot surprisal (how well the nouns fit the carrier), embedding similarity and word length are associated with the effect, jointly explaining 24\% of variance and none of the family gaps.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_h10.pdf}
+\caption{\textbf{Persona is not special once pairs are scaled and matched.} (a) Pair-level ignition effect $\bar D$ (mean over L20 and L24 of the median over a pair's two carriers of $\lambda(\text{threshold})-\text{mean}\,\lambda(\text{flanks})$) against endpoint distance for 100 pairs per family and 66 country pairs. (b) The same by family. (c) Spearman correlation of $\bar D$ with pair-level covariates over 366 pairs (blue: significant after Bonferroni correction).}
+\label{fig:h10}
+\end{figure}
+
+\section{Related work}
+\textbf{Lens methods.} The J-lens extends the logit lens~\citep{nostalgebraist2020logit} and the tuned lens~\citep{belrose2023tuned} and is related to the mean-Jacobian relation maps of \citet{hernandez2024linearity}; a recent refinement filters Jacobians for faithfulness~\citep{ayonrinde2026jpp}. We keep the lens fixed and ask what lies beyond its first-order assumption.
+\textbf{Linearization and attribution.} Gradient attribution~\citep{sundararajan2017axiomatic}, attribution patching~\citep{nanda2023attribution,syed2023attribution,kramar2024atp} and attribution graphs~\citep{ameisen2025circuit,lindsey2025biology,marks2024sparse} treat the network as locally linear, an approximation that rests on the piecewise-linear structure of the network~\citep{montufar2014number,elhage2021mathematical}. Closest to ours, \citet{zhang2026lies} diagnose first-order attribution error with a second-order reliability score and an HVP correction; our trust score is the same ratio applied to concept swaps rather than patched components. Pairwise interaction attribution with Hessians~\citep{janizek2021explaining} motivates our binding tests.
+\textbf{Curvature in deep learning.} HVPs~\citep{pearlmutter1994fast}, Lanczos iterations~\citep{lanczos1950iteration} and Hessian spectra of the loss~\citep{ghorbani2019investigation,yao2020pyhessian} are standard tools for the \emph{parameter} space; we apply them to \emph{activation} space, along concept directions.
+\textbf{Interventions and controls.} Concept swaps, steering and activation patching~\citep{meng2022locating,turner2023activation,heimersheim2024activation} are first-order or discrete interventions; weight-randomization sanity checks~\citep{adebayo2018sanity}, equivalence tests~\citep{lakens2017equivalence} and pre-registration~\citep{nosek2018preregistration} guard the claims we make about them. The superposition and linear-representation views~\citep{elhage2022toy,park2023linear,bricken2023monosemanticity,cunningham2023sparse} frame why lens vectors are overcomplete and why a sparse decomposition over them is meaningful.
+
+\section{Discussion}
+\textbf{What we learned.} The curvature of the MLP branch is raised along J-lens directions in three architectures and absent under weight randomization, so the lens's token-indexed directions are also privileged for second-order structure. The size of this effect varies by an order of magnitude across models (median ratio 1.3 to 9.4), which we cannot yet explain. The same lens is, however, sufficient for the interventions it supports: the first-order extrapolation ranks swap outcomes on both models we tested, the nonlinear gain does not, and the trust score marks effect size, not failure. For lens users this is reassuring; for the second-order program it localizes the contribution: curvature adds a description of the structure around lens directions, not a better predictor of what interventions do.
+
+\textbf{Limitations.}
+\begin{itemize}
+\item \emph{Few models and small, templated stimuli.} Three architectures for curvature, two for swaps; claim A on one model (the 27B used mixed precision validated on a shorter slice). The held-out suite is templated and city-dominated, and items and pairs that share words or relations are not independent, so the reported $p$-values and Wilson intervals are optimistic.
+\item \emph{Post-hoc elements,} all dated: the stratified analysis, the H5 follow-up, H9 part 2, the Gemma working strength (confirmed out of sample), and B$'$ itself, which we designed after B failed. The pre-registrations are internal.
+\item \emph{Measurement scope.} $\kappa$ is MLP-branch curvature at one layer at a time; lens vectors of active tokens are not independent of the residual's content, so part of the effect may be alignment with high-variance directions. Nulls use one lens-fitting recipe (30 prompts) and two to five seeds. Lens quality differs by model (417--1000 prompts).
+\item \emph{No causal test of use.} Nothing here shows the model uses curvature along lens directions; ``the first-order lens suffices'' rests on the failure of the hypotheses we tested.
+\end{itemize}
+
+\textbf{Open questions.} A causal test of whether curvature along lens directions matters for behavior (perturbing along high-curvature directions against matched controls) is the experiment this study most needs. Why the effect is 10$\times$ larger on Gemma, why the inhibition effect is specific to one model, and what makes country pairs the strongest ignition pairs are open. Two hypotheses (automatization under reinforcement learning and reflection training) need training checkpoints we do not have.
+
+\textbf{Reproducibility.} The code, tests, pre-registrations (with hashes), results and a step-by-step log of every bug found (a tokenizer scoring bug, per-block kwargs, Gemma's embedding scale and extra norm, a stimulus-spacing artifact, memory failures) are in the accompanying repository; Appendix~\ref{app:prereg} lists the registrations.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\appendix
+\section{Pre-registrations and result files}
+\label{app:prereg}
+\small
+Each experiment has a pre-registration in \texttt{hlens/docs/preregistration\_*.md}, hashed into its result file: H3, H5, H6, E1, H7, H8, H9 and H10 (first runs); the replication of the gates and of H2/H9 on Gemma and Qwen (with an addendum on stimulus spacing); B$'$ and its Llama repeat; mixed-precision validation; the 27B inhibition test; H6/H8 on Gemma; the held-out swap suite; case-insensitive rescoring with H1/E1 on held-out items; E1 and H1 on Gemma; the extended, control and 100-pair H10 runs; the claim-A scan and H10 covariate study (exploratory); and the Lanczos convergence check. Raw results are in \texttt{results/}; the narrative record, including every bug, is in \texttt{hlens/docs/handoff.md}.
+
+\section{Reproduction of first-order checks}
+\label{app:gates}
+\begin{table}[h]
+\centering\small
+\begin{tabular}{@{}p{4.3cm}p{5.4cm}p{5.2cm}@{}}
+\toprule
+Check & Qwen3.5-4B & Gemma 3 12B \\
+\midrule
+Workspace range (landmarks) & depth $\approx0.3$--$0.9$ & depth 0.43--0.91 (L20--43) \\
+Sparse decomposition (J-space variance) & 7--9\% at L12/16/20 (random atoms: 15\%) & --- \\
+Context-free MLP gain & not reproduced (8.3$\times$ at L30 only) & --- \\
+Swap, original suite (87/89 items) & 35\% (random 0/52) & 17\% at $\alpha=1.25$; 29\% at $\alpha=1.0$ (post hoc) \\
+Early averaging (restricted Hessians) & ratio 0.35 vs null 0.11; randomized 0.29 & --- \\
+\bottomrule
+\end{tabular}
+\caption{First-order checks and the early-averaging test (is an \emph{averaged} Hessian object meaningful?). A randomized network gives a similar ratio, so we make no claim about an averaged H-lens.}
+\end{table}
+
+\section{The failed first formulation of the curvature test (B)}
+\label{app:b}
+Pre-registered rules: T1 (lens/random ratio CI above 1 in $\ge75\%$ of layers at depth $\ge0.5$), T2 (median ratio $\ge1.5$) and T3 (null interval contains 1). T1 held on both models; T2 failed on Qwen (1.37); T3 failed in 7 of 8 null arms because intervals about $\pm0.0005$ wide excluded 1 at ratios 0.997--1.002. B$'$ replaced T3 by the equivalence margin and dropped T2 from the pass rule (the median is reported and ``large'' requires 1.5).
+
+\section{Mixed precision and Lanczos checks}
+A bf16 model with fp32 slice, final norm and head reproduced the full-fp32 inhibition result on Qwen3.5-4B over 24 trials $\times$ 3 offsets (all pre-registered criteria: sign agreement 98.6\%/100\%, Spearman 0.9987, median relative error 0.34\%, 90th percentile 0.96\%, identical test outcomes, thresholds within 0.05 in 24/24). Eight-iteration Lanczos eigenvalues agreed with 40-iteration references to a median 0.01\% (90th percentile 0.7\%, maximum 17.8\%); the 16-iteration estimate equals the 40-iteration one to numerical precision.
+
+\section{Pitfalls we hit}
+Counting the bare-space token made numeric answers overlap and swap margins identically zero (fixed; all swap results re-run, headline AUCs moved $\le0.03$). Reusing one block's rotary and mask kwargs for a whole slice gave errors of 4--5.5. Capturing slice kwargs inside a function transform crashed on reuse. Gemma multiplies embeddings by $\sqrt d$ and has a post-feedforward norm. A double space before the slot is split by one tokenizer and merged by another. A null rule of ``interval contains 1'' fails when intervals are narrow. A 10-pair persona/register contrast vanished at 100 pairs. Unsaved long runs were lost to memory events and reboots, motivating per-trial checkpointing.
+
+\end{document}
