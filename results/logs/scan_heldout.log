@@ -1,0 +1,18 @@
+=== Wed Oct 21 09:21:56 PM EST 2026 scan HO
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 3903.49it/s]
+Loading weights:   0%|          | 0/426 [00:00<?, ?it/s]Loading weights:   0%|          | 1/426 [00:00<01:58,  3.60it/s]Loading weights:  15%|█▌        | 66/426 [00:00<00:01, 209.07it/s]Loading weights:  25%|██▍       | 106/426 [00:00<00:01, 257.69it/s]Loading weights:  34%|███▎      | 143/426 [00:00<00:00, 288.57it/s]Loading weights:  42%|████▏     | 178/426 [00:00<00:00, 291.64it/s]Loading weights:  50%|████▉     | 211/426 [00:00<00:00, 292.40it/s]Loading weights:  57%|█████▋    | 243/426 [00:00<00:00, 297.45it/s]Loading weights:  65%|██████▌   | 278/426 [00:01<00:00, 296.83it/s]Loading weights:  73%|███████▎  | 310/426 [00:01<00:00, 291.85it/s]Loading weights:  83%|████████▎ | 355/426 [00:01<00:00, 317.23it/s]Loading weights:  91%|█████████ | 388/426 [00:01<00:00, 294.22it/s]Loading weights:  98%|█████████▊| 418/426 [00:01<00:00, 292.11it/s]Loading weights: 100%|██████████| 426/426 [00:01<00:00, 276.53it/s]
+Fetching 1 files:   0%|          | 0/1 [00:00<?, ?it/s]Fetching 1 files: 100%|██████████| 1/1 [00:00<00:00, 1038.71it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+/home/mv/repos/jacobian-lens/.venv/lib/python3.11/site-packages/torch/autograd/graph.py:882: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at /pytorch/aten/src/ATen/cuda/CublasHandlePool.cpp:370.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+lens_8_12: n=120 I=+0.0362 p=['9.9e-22', '9.9e-22', '9.9e-22'] bothneg=1.00 bonf=True
+lens_8_16: n=120 I=+0.0584 p=['9.9e-22', '9.9e-22', '9.9e-22'] bothneg=1.00 bonf=True
+lens_8_20: n=120 I=+0.1075 p=['9.9e-22', '4.6e-19', '9.9e-22'] bothneg=0.89 bonf=True
+lens_12_16: n=120 I=+0.0290 p=['9.9e-22', '4.6e-21', '9.9e-22'] bothneg=1.00 bonf=True
+lens_12_20: n=120 I=+0.1178 p=['9.9e-22', '4.8e-19', '9.9e-22'] bothneg=0.97 bonf=True
+lens_12_24: n=120 I=+0.1011 p=['1.5e-08', '0.25', '1.3e-08'] bothneg=0.29 bonf=False
+lens_16_20: n=120 I=+0.0547 p=['9.9e-22', '2e-09', '9.9e-22'] bothneg=0.97 bonf=True
+lens_16_24: n=120 I=+0.0702 p=['3.7e-10', '0.36', '4e-10'] bothneg=0.37 bonf=False
+lens_16_28: n=120 I=+0.0942 p=['5e-09', '0.2', '5.3e-09'] bothneg=0.27 bonf=False
+=== done 0 Thu Oct 22 12:08:42 AM EST 2026
