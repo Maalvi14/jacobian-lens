@@ -58,15 +58,20 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", required=True, choices=list(GRID))
     ap.add_argument("--summary", action="store_true")
+    ap.add_argument("--set", default="O", choices=["O", "HO"], help="trial set: the original 24 trials (O) or the 120 held-out trials (HO; see preregistration_scan_heldout.md)")
+    ap.add_argument("--directions", default=None, choices=list(DIRECTIONS), help="only this direction source")
     a = ap.parse_args()
-    cfgs = configs(a.model)
+    if a.set == "HO":
+        OUT_DIR = "results/h9_scan_ho"
+        PREREG = "hlens/docs/preregistration_scan_heldout.md"
+    cfgs = [c for c in configs(a.model) if a.directions in (None, c[0])]
     if a.summary:
         for k, v in load_summary(a.model).items():
             print(f"{k:22s} I={v['median_I']:+.4f} p={['%.2g' % x for x in v['p'].values()]} bothneg={v['frac_both_negative']:.2f} FO={v['median_first_order_cross']:+.3f} uncorr={v['uncorrected_pass']} bonf={v['bonferroni_pass']}")
         raise SystemExit(0)
     g = GRID[a.model]
     q = load_model(a.model, dtype=torch.float32)
-    trials = trial_sets(q.tokenizer, load_ignition("data/experiments/ignition.json"))["O"]
+    trials = trial_sets(q.tokenizer, load_ignition("data/experiments/ignition.json"))[a.set]
     os.makedirs(f"{OUT_DIR}/{a.model}", exist_ok=True)
     summary = load_summary(a.model)
     for d, src, tgt in cfgs:

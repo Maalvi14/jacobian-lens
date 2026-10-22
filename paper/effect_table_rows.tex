@@ -1,0 +1,25 @@
+Qwen3.5-4B & B$'$: $\kappa$ ratio at L30 & 2.20 & [2.15, 2.24] & prompt-cluster bootstrap \\
+Gemma 3 12B & B$'$: $\kappa$ ratio at L44 & 12.99 & [12.58, 13.45] & prompt-cluster bootstrap \\
+Llama 3.1 8B & B$'$: $\kappa$ ratio at L30 & 2.83 & [2.75, 2.92] & prompt-cluster bootstrap \\
+Qwen3.5-4B & swap success, $\alpha=1.25$ (held-out) & 0.49 (61/125) & [0.40, 0.57] & Wilson, items \\
+Gemma 3 12B & swap success, $\alpha=1.0$ (held-out) & 0.40 (55/138) & [0.32, 0.48] & Wilson, items \\
+Qwen3.5-4B (dev) & AUC of $N$ (success) & 0.39 & [0.23, 0.56] & bootstrap, items \\
+Qwen3.5-4B (dev) & AUC of $FO$ (success) & 0.75 & [0.60, 0.87] & bootstrap, items \\
+Qwen3.5-4B (HO) & AUC of $N$ (success) & 0.50 & [0.40, 0.60] & bootstrap, items \\
+Qwen3.5-4B (HO) & AUC of $FO$ (success) & 0.65 & [0.54, 0.74] & bootstrap, items \\
+Gemma 3 12B (HO) & AUC of $N$ (success) & 0.25 & [0.17, 0.33] & bootstrap, items \\
+Gemma 3 12B (HO) & AUC of $FO$ (success) & 0.81 & [0.73, 0.88] & bootstrap, items \\
+Qwen3.5-4B (dev) & AUC of $\tau$ (failure) & 0.22 & [0.10, 0.35] & bootstrap, items \\
+Qwen3.5-4B (HO, $\alpha=1.0$) & AUC of $\tau$ (failure) & 0.29 & [0.20, 0.39] & bootstrap, items \\
+Qwen3.5-4B (HO, $\alpha=1.25$) & AUC of $\tau$ (failure) & 0.51 & [0.40, 0.61] & bootstrap, items \\
+Gemma 3 12B (HO) & AUC of $\tau$ (failure) & 0.26 & [0.18, 0.34] & bootstrap, items \\
+Qwen3.5-4B & both cross-terms negative (O, n=24) & 1.00 & [0.86, 1.00] & Wilson, trials \\
+Qwen3.5-4B & both cross-terms negative (HO, n=120) & 0.88 & [0.80, 0.92] & Wilson, trials \\
+Gemma 3 12B & both cross-terms negative (O, n=24) & 0.29 & [0.15, 0.49] & Wilson, trials \\
+Gemma 3 12B & both cross-terms negative (HO, n=120) & 0.30 & [0.23, 0.39] & Wilson, trials \\
+Qwen3.6-27B & both cross-terms negative (O, n=24) & 0.08 & [0.02, 0.26] & Wilson, trials \\
+Qwen3.6-27B & both cross-terms negative (HO, n=120) & 0.17 & [0.11, 0.24] & Wilson, trials \\
+Qwen3.5-4B & H10 median $\bar D$, persona (100 pairs) & 0.30 & [0.23, 0.35] & bootstrap, pairs \\
+Qwen3.5-4B & H10 median $\bar D$, object-noun control (100 pairs) & 0.36 & [0.29, 0.42] & bootstrap, pairs \\
+Qwen3.5-4B & H10 median $\bar D$, countries (66 pairs) & 0.49 & [0.42, 0.62] & bootstrap, pairs \\
+Qwen3.5-4B & H10 median $\bar D$, near-synonym (100 pairs) & 0.06 & [0.02, 0.11] & bootstrap, pairs \\
